@@ -1,0 +1,66 @@
+name: uniload
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: uniload
+      POSTGRES_USER: uniload
+      POSTGRES_PASSWORD: uniload
+    ports: ["5433:5432"]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./docker/postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U uniload -d uniload"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    ports: ["6380:6379"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  minio:
+    image: minio/minio:RELEASE.2024-08-17T01-24-54Z
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: uniload
+      MINIO_ROOT_PASSWORD: uniload-dev-secret
+    ports: ["9000:9000", "9001:9001"]
+    volumes: [miniodata:/data]
+
+  api:
+    build: ./backend
+    env_file: ./backend/.env.docker
+    depends_on:
+      postgres: { condition: service_healthy }
+      redis: { condition: service_healthy }
+    command: >
+      sh -c "alembic upgrade head && python -m app.cli bootstrap && python -m app.cli seed &&
+             uvicorn app.main:app --host 0.0.0.0 --port 8000"
+    ports: ["8000:8000"]
+
+  worker:
+    build: ./backend
+    env_file: ./backend/.env.docker
+    depends_on:
+      redis: { condition: service_healthy }
+      api: { condition: service_started }
+    command: celery -A workers.celery_app worker --loglevel=info
+
+  frontend:
+    build: ./frontend
+    environment:
+      API_INTERNAL_URL: http://api:8000
+    depends_on: [api]
+    ports: ["3000:3000"]
+
+volumes:
+  pgdata:
+  miniodata:

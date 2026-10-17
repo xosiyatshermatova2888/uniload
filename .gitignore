@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+backend/.env
+
+# Node
+node_modules/
+.next/
+frontend/.env.local
+frontend/next-env.d.ts
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Generatsiya qilinadigan oraliq fayl (npm run gen:api)
+frontend/openapi.json
