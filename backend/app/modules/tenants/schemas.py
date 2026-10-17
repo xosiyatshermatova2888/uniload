@@ -5,7 +5,7 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, EmailStr, Field
 
-from app.core.schemas import ORMModel
+from app.core.schemas import ORMModel, Username
 
 
 class UniversityOut(ORMModel):
@@ -33,7 +33,8 @@ class UniversityUpdateIn(BaseModel):
 
 
 class FirstAdminIn(BaseModel):
-    email: EmailStr
+    username: Username
+    email: EmailStr | None = None
     full_name: str = Field(min_length=2, max_length=255)
     initial_password: str = Field(min_length=8, max_length=256)
 

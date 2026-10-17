@@ -1,10 +1,12 @@
 import uuid
 
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, Field
+
+from app.core.schemas import LoginName
 
 
 class LoginIn(BaseModel):
-    email: EmailStr
+    username: LoginName
     password: str = Field(min_length=1, max_length=256)
 
 
@@ -17,7 +19,8 @@ class UniversityBrief(BaseModel):
 
 class MeOut(BaseModel):
     id: uuid.UUID
-    email: str
+    username: str
+    email: str | None
     full_name: str
     locale: str
     is_platform_admin: bool
@@ -40,7 +43,7 @@ class PasswordChangeIn(BaseModel):
 
 
 class PasswordForgotIn(BaseModel):
-    email: EmailStr
+    username: LoginName
 
 
 class PasswordResetIn(BaseModel):

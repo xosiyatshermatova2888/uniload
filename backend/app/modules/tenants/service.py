@@ -106,7 +106,8 @@ def create_university(ctx: Ctx, body: UniversityCreateIn) -> PlatformUniversityO
     trial = plan.code == "trial"
     ctx.db.add(Subscription(university_id=uni.id, plan_id=plan.id, status="trial" if trial else "active",
                             starts_at=now, ends_at=now + timedelta(days=TRIAL_DAYS) if trial else None))
-    admin = User(university_id=uni.id, email=body.first_admin.email.strip().lower(),
+    admin = User(university_id=uni.id, username=body.first_admin.username,
+                 email=body.first_admin.email.strip().lower() if body.first_admin.email else None,
                  full_name=body.first_admin.full_name, must_change_password=True,
                  password_hash=hash_password(body.first_admin.initial_password))
     ctx.db.add(admin)
@@ -116,7 +117,7 @@ def create_university(ctx: Ctx, body: UniversityCreateIn) -> PlatformUniversityO
     ctx.db.flush()
     audit.record_ctx(ctx, action="university.created", entity_type="university", entity_id=uni.id,
                      university_id=uni.id,
-                     after={**audit.snapshot(uni), "plan": plan.code, "first_admin": admin.email})
+                     after={**audit.snapshot(uni), "plan": plan.code, "first_admin": admin.username})
     ctx.db.commit()
     return _platform_out(ctx, uni)
 

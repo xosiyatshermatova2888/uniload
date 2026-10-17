@@ -52,7 +52,7 @@ def test_copy_from_other_tenant_year_not_found(client, tu_office, pu_year):
 def test_users_and_roles_are_isolated(client, tu_admin, pu_admin, owner_db, unique):
     pu_users = client.get("/api/v1/users?size=200", headers=pu_admin).json()["items"]
     tu_users = client.get("/api/v1/users?size=200", headers=tu_admin).json()["items"]
-    assert {u["email"].split("@")[1] for u in tu_users} == {"demo-tu.uniload.example"}
+    assert {u["username"].rsplit(".", 1)[1] for u in tu_users if "." in u["username"]} == {"tu"}
     assert client.get(f"/api/v1/users/{pu_users[0]['id']}", headers=tu_admin).status_code == 404
 
     role = client.post("/api/v1/roles", headers=pu_admin, json={
@@ -60,7 +60,7 @@ def test_users_and_roles_are_isolated(client, tu_admin, pu_admin, owner_db, uniq
     assert role["id"] not in {r["id"] for r in client.get("/api/v1/roles", headers=tu_admin).json()}
     assert client.get(f"/api/v1/roles/{role['id']}", headers=tu_admin).status_code == 404
     # Boshqa tenant rolini o‘z foydalanuvchisiga berib bo‘lmaydi.
-    me = next(u for u in tu_users if u["email"].startswith("oqituvchi"))
+    me = next(u for u in tu_users if u["username"] == "oqituvchi.tu")
     r = client.put(f"/api/v1/users/{me['id']}/roles", headers=tu_admin,
                    json={"roles": [{"role_id": role["id"], "scope_type": "university"}]})
     assert r.status_code == 422 and r.json()["code"] == "ROLE_NOT_FOUND"

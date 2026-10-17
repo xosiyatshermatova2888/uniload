@@ -12,7 +12,7 @@ type Status = "loading" | "authenticated" | "anonymous"
 interface AuthState {
   status: Status
   me: Me | null
-  login: (email: string, password: string) => Promise<Me>
+  login: (username: string, password: string) => Promise<Me>
   logout: () => Promise<void>
   reloadMe: () => Promise<void>
   can: (permission: string) => boolean
@@ -81,12 +81,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [refresh])
 
   const login = useCallback(
-    async (email: string, password: string) => {
+    async (username: string, password: string) => {
       const response = await fetch("/api/v1/auth/login", {
         method: "POST",
         credentials: "same-origin",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username, password }),
       })
       if (!response.ok) throw await toApiError(response)
       const token = (await response.json()) as TokenOut

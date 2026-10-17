@@ -71,7 +71,9 @@ export default function UsersPage() {
       cell: ({ row }) => (
         <div>
           <div className="font-medium">{row.original.full_name}</div>
-          <div className="text-xs text-muted-foreground">{row.original.email}</div>
+          <div className="text-xs text-muted-foreground">
+            <span className="font-mono">{row.original.username}</span>{row.original.email && ` · ${row.original.email}`}
+          </div>
         </div>
       ),
     },
@@ -142,8 +144,11 @@ export default function UsersPage() {
   )
 }
 
+const USERNAME = /^[a-z0-9][a-z0-9._-]{2,63}$/
+
 const createSchema = z.object({
-  email: z.string().email(),
+  username: z.string().trim().toLowerCase().regex(USERNAME),
+  email: z.union([z.literal(""), z.string().email()]).optional(),
   full_name: z.string().min(2),
   phone: z.string().max(32).optional(),
   initial_password: z.string().min(8).regex(/[A-Za-z]/).regex(/\d/),
@@ -158,7 +163,9 @@ function CreateUserDialog({ roles, onClose }: { roles: Schemas["RoleOut"][]; onC
 
   async function submit(values: z.infer<typeof createSchema>) {
     try {
-      await unwrap(api.POST("/api/v1/users", { body: { ...values, phone: values.phone || null, roles: assignments } }))
+      await unwrap(api.POST("/api/v1/users", {
+        body: { ...values, email: values.email || null, phone: values.phone || null, roles: assignments },
+      }))
       toast.success(t("users.created"))
       await queryClient.invalidateQueries({ queryKey: ["users"] })
       onClose()
@@ -176,8 +183,12 @@ function CreateUserDialog({ roles, onClose }: { roles: Schemas["RoleOut"][]; onC
           <Field label={t("users.fullName")} htmlFor="u-name" error={errors.full_name && " "}>
             <Input id="u-name" {...form.register("full_name")} />
           </Field>
+          <Field label={`${t("users.username")} *`} htmlFor="u-username" hint={t("users.usernameHint")}
+            error={errors.username && t("users.usernameInvalid")}>
+            <Input id="u-username" autoCapitalize="none" spellCheck={false} className="font-mono" {...form.register("username")} />
+          </Field>
           <div className="grid gap-4 sm:grid-cols-2">
-            <Field label={t("users.email")} htmlFor="u-email" error={errors.email && " "}>
+            <Field label={t("users.email")} htmlFor="u-email" hint={t("users.emailHint")} error={errors.email && " "}>
               <Input id="u-email" type="email" {...form.register("email")} />
             </Field>
             <Field label={t("users.phone")} htmlFor="u-phone">
@@ -229,7 +240,7 @@ function EditRolesDialog({ user, roles, onClose }: { user: User; roles: Schemas[
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>{t("users.editRoles")}</DialogTitle>
-          <DialogDescription>{user.full_name} · {user.email}</DialogDescription>
+          <DialogDescription>{user.full_name} · {user.username}</DialogDescription>
         </DialogHeader>
         {error && <Alert variant="destructive"><AlertDescription>{error}</AlertDescription></Alert>}
         {detail.isLoading ? <TableSkeleton rows={2} /> : <RoleAssignmentsEditor roles={roles} value={value} onChange={setAssignments} />}

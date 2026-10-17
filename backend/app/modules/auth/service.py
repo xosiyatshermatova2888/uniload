@@ -33,7 +33,7 @@ from app.modules.users.models import PasswordResetToken, RefreshToken, Role, Use
 
 log = logging.getLogger("uniload.auth")
 
-INVALID_CREDENTIALS = "Email yoki parol noto‘g‘ri"
+INVALID_CREDENTIALS = "Login yoki parol noto‘g‘ri"
 
 
 @dataclass
@@ -54,7 +54,7 @@ def build_me(db: Session, user: User) -> MeOut:
     ).all()
     perms = sorted({g.permission for g in load_grants(db, user.id)})
     return MeOut(
-        id=user.id, email=user.email, full_name=user.full_name, locale=user.locale,
+        id=user.id, username=user.username, email=user.email, full_name=user.full_name, locale=user.locale,
         is_platform_admin=user.is_platform_admin, must_change_password=user.must_change_password,
         university=UniversityBrief(id=university.id, code=university.code, name=university.name,
                                    short_name=university.short_name) if university else None,
@@ -93,16 +93,16 @@ def _check_tenant_active(db: Session, user: User) -> None:
                        status=403, code="TENANT_SUSPENDED", title="Kirish cheklangan")
 
 
-def login(db: Session, *, email: str, password: str, ip: str | None, user_agent: str | None) -> Issued:
+def login(db: Session, *, username: str, password: str, ip: str | None, user_agent: str | None) -> Issued:
     s = get_settings()
-    email = email.strip().lower()
-    user = db.scalar(select(User).where(User.email == email))
+    username = username.strip().lower()
+    user = db.scalar(select(User).where(User.username == username))
     now = _now()
 
     if user is None:
         verify_password(password, None)  # vaqtni tenglashtirish
         audit.record(db, action="auth.login_failed", entity_type="user", university_id=None,
-                     actor_user_id=None, ip=ip, after={"email": email, "reason": "unknown_email"})
+                     actor_user_id=None, ip=ip, after={"username": username, "reason": "unknown_username"})
         db.commit()
         raise Unauthorized(INVALID_CREDENTIALS, code="INVALID_CREDENTIALS")
 
@@ -193,10 +193,11 @@ def change_password(db: Session, *, user: User, current: str, new: str, ip: str 
     db.commit()
 
 
-def forgot_password(db: Session, *, email: str, ip: str | None) -> None:
-    """Email mavjudligini oshkor qilmaydi. Hozircha xat o‘rniga token logga yoziladi (mock)."""
-    user = db.scalar(select(User).where(User.email == email.strip().lower()))
-    if user is None or not user.is_active:
+def forgot_password(db: Session, *, username: str, ip: str | None) -> None:
+    """Login mavjudligini oshkor qilmaydi. Token foydalanuvchi emailiga yuboriladi (hozircha mock — logga).
+    Email kiritilmagan foydalanuvchi parolini administrator tiklaydi."""
+    user = db.scalar(select(User).where(User.username == username.strip().lower()))
+    if user is None or not user.is_active or not user.email:
         return
     raw, token_hash = new_opaque_token()
     db.add(PasswordResetToken(user_id=user.id, token_hash=token_hash,

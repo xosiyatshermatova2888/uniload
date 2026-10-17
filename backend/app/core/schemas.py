@@ -1,10 +1,21 @@
-from typing import Generic, TypeVar
+from typing import Annotated, Generic, TypeVar
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, BeforeValidator, ConfigDict, Field, StringConstraints
 from sqlalchemy import Select, func, select
 from sqlalchemy.orm import Session
 
 T = TypeVar("T")
+
+USERNAME_PATTERN = r"^[a-z0-9][a-z0-9._-]{2,63}$"
+
+
+def _normalize_login(value: object) -> object:
+    return value.strip().lower() if isinstance(value, str) else value
+
+
+# Login: kichik lotin harflari, raqamlar, nuqta, chiziqcha va pastki chiziq; 3–64 belgi.
+Username = Annotated[str, BeforeValidator(_normalize_login), StringConstraints(pattern=USERNAME_PATTERN)]
+LoginName = Annotated[str, BeforeValidator(_normalize_login), StringConstraints(min_length=1, max_length=64)]
 
 
 class ORMModel(BaseModel):

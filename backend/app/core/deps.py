@@ -83,7 +83,7 @@ def get_ctx(request: Request,
             raise Unauthorized("Token yaroqsiz", code="TOKEN_INVALID")
         principal = Principal(
             user_id=user.id, university_id=user.university_id, is_platform_admin=user.is_platform_admin,
-            email=user.email, full_name=user.full_name, teacher_id=user.teacher_id,
+            username=user.username, full_name=user.full_name, teacher_id=user.teacher_id,
             grants=load_grants(db, user.id),
         )
         yield Ctx(db=db, principal=principal,

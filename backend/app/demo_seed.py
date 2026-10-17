@@ -151,7 +151,7 @@ def seed_reference(db: Session, university_id: uuid.UUID, year: AcademicYear) ->
     # Demo kafedra mudiri — DI kafedrasi ko‘lamida; demo PO — birinchi o‘qituvchi profiliga bog‘lanadi.
     head_role = db.scalar(select(Role).where(Role.university_id.is_(None), Role.code == "department_head"))
     for user in db.scalars(select(User).where(User.university_id == u)):
-        prefix = user.email.split("@")[0]
+        prefix = user.username.split(".")[0]
         if prefix == "kafedra":
             for ur in db.scalars(select(UserRole).where(UserRole.user_id == user.id, UserRole.role_id == head_role.id)):
                 ur.scope_type, ur.scope_id = "department", dep["DI"].id

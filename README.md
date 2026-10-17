@@ -47,17 +47,18 @@ cd frontend && npm install --legacy-peer-deps && npm run dev
 
 ## Demo foydalanuvchilar
 
-Faqat demo ma’lumotlar (real shaxsiy ma’lumot yo‘q). Parol — `backend/.env.example` dagi `UNILOAD_SEED_PASSWORD`.
+Tizimga **login va parol** bilan kiriladi (email ixtiyoriy — faqat parolni tiklash uchun). Faqat demo ma’lumotlar,
+real shaxsiy ma’lumot yo‘q. Parol — `backend/.env.example` dagi `UNILOAD_SEED_PASSWORD`.
 
-| Rol | Email |
+| Rol | Login |
 |---|---|
-| Super Admin | `superadmin@uniload.example` |
-| Universitet Admin | `admin@demo-tu.uniload.example` |
-| O‘quv bo‘limi | `oquv@demo-tu.uniload.example` |
-| Kafedra mudiri | `kafedra@demo-tu.uniload.example` |
-| Professor-o‘qituvchi | `oqituvchi@demo-tu.uniload.example` |
+| Super Admin | `superadmin` |
+| Universitet Admin | `admin.tu` |
+| O‘quv bo‘limi | `oquv.tu` |
+| Kafedra mudiri (DI kafedrasi) | `kafedra.tu` |
+| Professor-o‘qituvchi | `oqituvchi.tu` |
 
-Ikkinchi demo universitet (`demo-pu`) xuddi shu prefikslar bilan — tenant izolyatsiyasini sinash uchun.
+Ikkinchi demo universitet uchun xuddi shu loginlar `.pu` bilan (`oquv.pu`, `admin.pu`, …) — tenant izolyatsiyasini sinash uchun.
 
 ## Testlar
 

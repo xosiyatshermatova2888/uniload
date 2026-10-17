@@ -15,19 +15,21 @@ def _role_id(client, headers, code):
 def test_admin_creates_user_with_role(client, tu_admin, unique):
     office_role = _role_id(client, tu_admin, "academic_office")
     r = client.post("/api/v1/users", headers=tu_admin, json={
-        "email": f"Yangi-{unique}@demo-tu.uniload.example", "full_name": "Yangi Xodim",
+        "username": f" Yangi-{unique} ", "email": f"Yangi-{unique}@demo-tu.uniload.example",
+        "full_name": "Yangi Xodim",
         "initial_password": "Boshlang1ch", "roles": [{"role_id": office_role, "scope_type": "university"}]})
     assert r.status_code == 201, r.text
     user = r.json()
+    assert user["username"] == f"yangi-{unique}"  # login kichik harfga keltiriladi
     assert user["email"] == f"yangi-{unique}@demo-tu.uniload.example"
     assert [a["role_code"] for a in user["roles"]] == ["academic_office"]
-    headers = login(client, user["email"], "Boshlang1ch")
+    headers = login(client, user["username"], "Boshlang1ch")
     assert "academic_year.create" in client.get("/api/v1/auth/me", headers=headers).json()["permissions"]
 
 
-def test_duplicate_email_conflict(client, tu_admin):
+def test_duplicate_username_conflict(client, tu_admin):
     r = client.post("/api/v1/users", headers=tu_admin, json={
-        "email": "oquv@demo-tu.uniload.example", "full_name": "Takror", "initial_password": "Boshlang1ch"})
+        "username": "oquv.tu", "full_name": "Takror", "initial_password": "Boshlang1ch"})
     assert r.status_code == 409 and r.json()["code"] == "DUPLICATE"
 
 
@@ -55,7 +57,7 @@ def test_custom_role_lifecycle(client, tu_admin, unique):
     assert unknown.status_code == 422
 
     user = client.post("/api/v1/users", headers=tu_admin, json={
-        "email": f"pr-{unique}@demo-tu.uniload.example", "full_name": "Prorektor", "initial_password": "Boshlang1ch",
+        "username": f"pr-{unique}", "full_name": "Prorektor", "initial_password": "Boshlang1ch",
         "roles": [{"role_id": role["id"], "scope_type": "university"}]}).json()
     assert client.delete(f"/api/v1/roles/{role['id']}", headers=tu_admin).json()["code"] == "ROLE_IN_USE"
     client.put(f"/api/v1/users/{user['id']}/roles", headers=tu_admin, json={"roles": []})
@@ -85,7 +87,7 @@ def test_admin_cannot_lock_themselves_out(client, tu_admin):
 def test_department_scope_requires_scope_id(client, tu_admin, unique):
     head_role = _role_id(client, tu_admin, "department_head")
     r = client.post("/api/v1/users", headers=tu_admin, json={
-        "email": f"km-{unique}@demo-tu.uniload.example", "full_name": "KM", "initial_password": "Boshlang1ch",
+        "username": f"km-{unique}", "full_name": "KM", "initial_password": "Boshlang1ch",
         "roles": [{"role_id": head_role, "scope_type": "department"}]})
     assert r.status_code == 422 and r.json()["code"] == "SCOPE_INVALID"
 
@@ -106,12 +108,12 @@ def test_university_settings_update(client, tu_admin, tu_office):
 def test_super_admin_creates_university(client, super_admin, unique):
     r = client.post("/api/v1/platform/universities", headers=super_admin, json={
         "code": f"new-{unique}", "name": "DEMO Yangi universitet", "plan_code": "trial",
-        "first_admin": {"email": f"admin@new-{unique}.uniload.example", "full_name": "Admin",
+        "first_admin": {"username": f"admin.new-{unique}", "full_name": "Admin",
                         "initial_password": "Boshlang1ch"}})
     assert r.status_code == 201, r.text
     uni = r.json()
     assert uni["subscription_status"] == "trial" and uni["users_count"] == 1
-    admin = login(client, f"admin@new-{unique}.uniload.example", "Boshlang1ch")
+    admin = login(client, f"admin.new-{unique}", "Boshlang1ch")
     me = client.get("/api/v1/auth/me", headers=admin).json()
     assert me["university"]["code"] == f"new-{unique}" and "users.manage" in me["permissions"]
     assert client.get("/api/v1/academic-years", headers=admin).json() == []
@@ -120,7 +122,7 @@ def test_super_admin_creates_university(client, super_admin, unique):
     r = client.patch(f"/api/v1/platform/universities/{uni['id']}", headers=super_admin,
                      json={"row_version": uni["row_version"], "status": "suspended"})
     assert r.status_code == 200
-    blocked = client.post("/api/v1/auth/login", json={"email": f"admin@new-{unique}.uniload.example",
+    blocked = client.post("/api/v1/auth/login", json={"username": f"admin.new-{unique}",
                                                        "password": "Boshlang1ch"})
     assert blocked.status_code == 403 and blocked.json()["code"] == "TENANT_SUSPENDED"
 

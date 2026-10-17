@@ -245,9 +245,9 @@ def test_department_scope_for_heads(client, tu_admin, tu_head, tu_year, refs, un
         "code": f"at_manager_{unique}", "name": "AT kadrlar", "default_scope": "department",
         "permissions": ["teachers.view", "teachers.manage"]}), 201)
     user = ok(client.post(f"{API}/users", headers=tu_admin, json={
-        "email": f"at-{unique}@demo-tu.uniload.example", "full_name": "AT kadr", "initial_password": "Boshlang1ch",
+        "username": f"at-{unique}", "full_name": "AT kadr", "initial_password": "Boshlang1ch",
         "roles": [{"role_id": role["id"], "scope_type": "department", "scope_id": at}]}), 201)
-    headers = login(client, user["email"], "Boshlang1ch")
+    headers = login(client, user["username"], "Boshlang1ch")
     assert client.post(f"{API}/years/{tu_year['id']}/employment", headers=headers, json=body).status_code == 403
     created = ok(client.post(f"{API}/years/{tu_year['id']}/employment", headers=headers,
                              json={**body, "department_id": at}), 201)
@@ -255,7 +255,7 @@ def test_department_scope_for_heads(client, tu_admin, tu_head, tu_year, refs, un
     assert client.delete(f"{API}/years/{tu_year['id']}/employment/{created['id']}", headers=headers).status_code == 204
 
     bad = client.post(f"{API}/users", headers=tu_admin, json={
-        "email": f"bad-{unique}@demo-tu.uniload.example", "full_name": "Xato", "initial_password": "Boshlang1ch",
+        "username": f"bad-{unique}", "full_name": "Xato", "initial_password": "Boshlang1ch",
         "roles": [{"role_id": role["id"], "scope_type": "department", "scope_id": str(uuid.uuid4())}]})
     assert bad.status_code == 422 and bad.json()["code"] == "SCOPE_NOT_FOUND"
 
@@ -264,9 +264,9 @@ def test_faculty_scope_expands_to_departments(client, tu_admin, refs, unique):
     faculty_id = refs["deps"]["IQ"]["faculty_id"]
     role = next(r for r in ok(client.get(f"{API}/roles", headers=tu_admin)) if r["code"] == "department_head")
     user = ok(client.post(f"{API}/users", headers=tu_admin, json={
-        "email": f"dekan-{unique}@demo-tu.uniload.example", "full_name": "Dekan", "initial_password": "Boshlang1ch",
+        "username": f"dekan-{unique}", "full_name": "Dekan", "initial_password": "Boshlang1ch",
         "roles": [{"role_id": role["id"], "scope_type": "faculty", "scope_id": faculty_id}]}), 201)
-    headers = login(client, user["email"], "Boshlang1ch")
+    headers = login(client, user["username"], "Boshlang1ch")
     year = next(y for y in ok(client.get(f"{API}/academic-years", headers=headers)) if y["start_year"] == 2026)
     visible = ok(client.get(f"{API}/years/{year['id']}/employment", headers=headers))
     assert visible and {e["department_id"] for e in visible} == {refs["deps"]["IQ"]["id"]}
@@ -338,7 +338,7 @@ def test_reference_data_isolated_between_tenants(client, tu_office, pu_office, r
     pu_subjects = {s["id"] for s in ok(client.get(f"{API}/subjects", headers=pu_office))}
     assert pu_subjects.isdisjoint({s["id"] for s in refs["subjects"].values()})
     dep_id = refs["deps"]["DI"]["id"]
-    r = client.patch(f"{API}/departments/{dep_id}", headers=login(client, "admin@demo-pu.uniload.example"),
+    r = client.patch(f"{API}/departments/{dep_id}", headers=login(client, "admin.pu"),
                      json={"row_version": 1, "name": "Hack"})
     assert r.status_code == 404
     assert client.get(f"{API}/years/{tu_year['id']}/groups", headers=pu_office).status_code == 404
@@ -359,9 +359,9 @@ def test_reference_data_isolated_between_tenants(client, tu_office, pu_office, r
 def test_new_university_gets_lesson_types(client, super_admin, unique):
     ok(client.post(f"{API}/platform/universities", headers=super_admin, json={
         "code": f"lt-{unique}", "name": "DEMO LT universiteti", "first_admin": {
-            "email": f"admin@lt-{unique}.uniload.example", "full_name": "Admin", "initial_password": "Boshlang1ch"}}),
+            "username": f"admin.lt-{unique}", "full_name": "Admin", "initial_password": "Boshlang1ch"}}),
        201)
-    admin = login(client, f"admin@lt-{unique}.uniload.example", "Boshlang1ch")
+    admin = login(client, f"admin.lt-{unique}", "Boshlang1ch")
     # Universitet admini o‘quv rejani ko‘ra olmaydi (curriculum.view bor) — mashg‘ulot turlari yaratilgan.
     types = ok(client.get(f"{API}/lesson-types", headers=admin))
     assert len(types) == 11 and all(t["is_system"] for t in types)

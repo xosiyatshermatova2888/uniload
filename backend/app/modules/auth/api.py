@@ -37,7 +37,7 @@ def _meta(request: Request) -> tuple[str | None, str | None]:
 def login(body: LoginIn, request: Request, response: Response) -> TokenOut:
     ip, ua = _meta(request)
     with platform_session() as db:
-        issued = service.login(db, email=body.email, password=body.password, ip=ip, user_agent=ua)
+        issued = service.login(db, username=body.username, password=body.password, ip=ip, user_agent=ua)
     _set_refresh_cookie(response, issued.refresh_raw, issued.refresh_expires)
     return issued.token
 
@@ -75,7 +75,7 @@ def change_password(body: PasswordChangeIn, ctx: Ctx = Depends(get_ctx)) -> None
 def forgot_password(body: PasswordForgotIn, request: Request) -> None:
     ip, _ = _meta(request)
     with platform_session() as db:
-        service.forgot_password(db, email=body.email, ip=ip)
+        service.forgot_password(db, username=body.username, ip=ip)
 
 
 @router.post("/password/reset", status_code=status.HTTP_204_NO_CONTENT, summary="Yangi parol o‘rnatish")

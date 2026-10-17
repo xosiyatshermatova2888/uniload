@@ -58,49 +58,50 @@ def owner_db():
         yield db
 
 
-def login(client: TestClient, email: str, password: str = PASSWORD) -> dict[str, str]:
-    r = client.post("/api/v1/auth/login", json={"email": email, "password": password})
+def login(client: TestClient, username: str, password: str = PASSWORD) -> dict[str, str]:
+    r = client.post("/api/v1/auth/login", json={"username": username, "password": password})
     assert r.status_code == 200, r.text
     return {"Authorization": f"Bearer {r.json()['access_token']}"}
 
 
-def email_for(role_prefix: str, uni: str = "demo-tu") -> str:
-    return f"{role_prefix}@{uni}.uniload.example"
+def login_for(role_prefix: str, uni: str = "demo-tu") -> str:
+    """Demo seed logini: <rol prefiksi>.<universitet qisqa kodi>, masalan `oquv.tu`."""
+    return f"{role_prefix}.{uni.removeprefix('demo-')}"
 
 
 @pytest.fixture(scope="session")
 def tu_admin(client):
-    return login(client, email_for("admin"))
+    return login(client, login_for("admin"))
 
 
 @pytest.fixture(scope="session")
 def tu_office(client):
-    return login(client, email_for("oquv"))
+    return login(client, login_for("oquv"))
 
 
 @pytest.fixture(scope="session")
 def tu_head(client):
-    return login(client, email_for("kafedra"))
+    return login(client, login_for("kafedra"))
 
 
 @pytest.fixture(scope="session")
 def tu_teacher(client):
-    return login(client, email_for("oqituvchi"))
+    return login(client, login_for("oqituvchi"))
 
 
 @pytest.fixture(scope="session")
 def pu_office(client):
-    return login(client, email_for("oquv", "demo-pu"))
+    return login(client, login_for("oquv", "demo-pu"))
 
 
 @pytest.fixture(scope="session")
 def pu_admin(client):
-    return login(client, email_for("admin", "demo-pu"))
+    return login(client, login_for("admin", "demo-pu"))
 
 
 @pytest.fixture(scope="session")
 def super_admin(client):
-    return login(client, "superadmin@uniload.example")
+    return login(client, "superadmin")
 
 
 @pytest.fixture

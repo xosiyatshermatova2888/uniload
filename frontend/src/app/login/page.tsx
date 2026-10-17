@@ -16,13 +16,13 @@ import { useT } from "@/i18n"
 import { ApiError } from "@/lib/api/client"
 import { useAuth } from "@/lib/auth"
 
-const schema = z.object({ email: z.string().email(), password: z.string().min(1) })
+const schema = z.object({ username: z.string().trim().min(1), password: z.string().min(1) })
 
 export default function LoginPage() {
   const t = useT()
   const router = useRouter()
   const { status, login } = useAuth()
-  const form = useForm<z.infer<typeof schema>>({ resolver: zodResolver(schema), defaultValues: { email: "", password: "" } })
+  const form = useForm<z.infer<typeof schema>>({ resolver: zodResolver(schema), defaultValues: { username: "", password: "" } })
 
   useEffect(() => {
     if (status === "authenticated") router.replace("/")
@@ -30,7 +30,7 @@ export default function LoginPage() {
 
   async function submit(values: z.infer<typeof schema>) {
     try {
-      await login(values.email, values.password)
+      await login(values.username, values.password)
       router.replace("/")
     } catch (e) {
       form.setError("root", { message: e instanceof ApiError ? e.message : String(e) })
@@ -60,8 +60,9 @@ export default function LoginPage() {
               {errors.root && (
                 <Alert variant="destructive"><AlertDescription>{errors.root.message}</AlertDescription></Alert>
               )}
-              <Field label={t("auth.email")} htmlFor="email" error={errors.email && " "}>
-                <Input id="email" type="email" autoComplete="username" autoFocus {...form.register("email")} />
+              <Field label={t("auth.username")} htmlFor="username" error={errors.username && " "}>
+                <Input id="username" type="text" autoComplete="username" autoCapitalize="none" spellCheck={false}
+                  autoFocus {...form.register("username")} />
               </Field>
               <Field label={t("auth.password")} htmlFor="password" error={errors.password && " "}>
                 <Input id="password" type="password" autoComplete="current-password" {...form.register("password")} />

@@ -1747,11 +1747,10 @@ export interface components {
         };
         /** FirstAdminIn */
         FirstAdminIn: {
-            /**
-             * Email
-             * Format: email
-             */
-            email: string;
+            /** Username */
+            username: string;
+            /** Email */
+            email?: string | null;
             /** Full Name */
             full_name: string;
             /** Initial Password */
@@ -1962,11 +1961,8 @@ export interface components {
         };
         /** LoginIn */
         LoginIn: {
-            /**
-             * Email
-             * Format: email
-             */
-            email: string;
+            /** Username */
+            username: string;
             /** Password */
             password: string;
         };
@@ -1977,8 +1973,10 @@ export interface components {
              * Format: uuid
              */
             id: string;
+            /** Username */
+            username: string;
             /** Email */
-            email: string;
+            email: string | null;
             /** Full Name */
             full_name: string;
             /** Locale */
@@ -2024,11 +2022,8 @@ export interface components {
         };
         /** PasswordForgotIn */
         PasswordForgotIn: {
-            /**
-             * Email
-             * Format: email
-             */
-            email: string;
+            /** Username */
+            username: string;
         };
         /** PasswordResetIn */
         PasswordResetIn: {
@@ -2800,11 +2795,10 @@ export interface components {
         };
         /** UserCreateIn */
         UserCreateIn: {
-            /**
-             * Email
-             * Format: email
-             */
-            email: string;
+            /** Username */
+            username: string;
+            /** Email */
+            email?: string | null;
             /** Full Name */
             full_name: string;
             /** Phone */
@@ -2827,8 +2821,10 @@ export interface components {
              * Format: uuid
              */
             id: string;
+            /** Username */
+            username: string;
             /** Email */
-            email: string;
+            email: string | null;
             /** Full Name */
             full_name: string;
             /** Phone */
@@ -2858,8 +2854,10 @@ export interface components {
              * Format: uuid
              */
             id: string;
+            /** Username */
+            username: string;
             /** Email */
-            email: string;
+            email: string | null;
             /** Full Name */
             full_name: string;
             /** Phone */
@@ -2884,6 +2882,10 @@ export interface components {
         UserUpdateIn: {
             /** Row Version */
             row_version: number;
+            /** Username */
+            username?: string | null;
+            /** Email */
+            email?: string | null;
             /** Full Name */
             full_name?: string | null;
             /** Phone */

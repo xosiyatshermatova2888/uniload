@@ -90,7 +90,8 @@ const schema = z.object({
   name: z.string().min(3),
   short_name: z.string().max(64).optional(),
   plan_code: z.string(),
-  admin_email: z.string().email(),
+  admin_username: z.string().trim().toLowerCase().regex(/^[a-z0-9][a-z0-9._-]{2,63}$/),
+  admin_email: z.union([z.literal(""), z.string().email()]).optional(),
   admin_name: z.string().min(2),
   admin_password: z.string().min(8).regex(/[A-Za-z]/).regex(/\d/),
 })
@@ -107,7 +108,9 @@ function CreateUniversityDialog({ onClose }: { onClose: () => void }) {
       await unwrap(api.POST("/api/v1/platform/universities", {
         body: {
           code: v.code, name: v.name, short_name: v.short_name || null, plan_code: v.plan_code,
-          first_admin: { email: v.admin_email, full_name: v.admin_name, initial_password: v.admin_password },
+          first_admin: {
+            username: v.admin_username, email: v.admin_email || null, full_name: v.admin_name, initial_password: v.admin_password,
+          },
         },
       }))
       toast.success(t("platform.created"))
@@ -138,8 +141,13 @@ function CreateUniversityDialog({ onClose }: { onClose: () => void }) {
           <p className="pt-1 text-sm font-medium">{t("platform.firstAdmin")}</p>
           <div className="grid gap-4 sm:grid-cols-2">
             <Field label={t("users.fullName")} htmlFor="an" error={errors.admin_name && " "}><Input id="an" {...form.register("admin_name")} /></Field>
-            <Field label={t("users.email")} htmlFor="ae" error={errors.admin_email && " "}><Input id="ae" type="email" {...form.register("admin_email")} /></Field>
+            <Field label={t("users.username")} htmlFor="au" error={errors.admin_username && t("users.usernameInvalid")}>
+              <Input id="au" autoCapitalize="none" spellCheck={false} className="font-mono" {...form.register("admin_username")} />
+            </Field>
           </div>
+          <Field label={t("users.email")} htmlFor="ae" hint={t("users.emailHint")} error={errors.admin_email && " "}>
+            <Input id="ae" type="email" {...form.register("admin_email")} />
+          </Field>
           <Field label={t("users.initialPassword")} htmlFor="ap" hint={t("users.initialPasswordHint")}
             error={errors.admin_password && t("auth.passwordRule")}>
             <Input id="ap" type="password" autoComplete="new-password" {...form.register("admin_password")} />

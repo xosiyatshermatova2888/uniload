@@ -4,7 +4,7 @@ from typing import Literal
 
 from pydantic import BaseModel, EmailStr, Field
 
-from app.core.schemas import ORMModel
+from app.core.schemas import ORMModel, Username
 
 ScopeType = Literal["university", "faculty", "department", "self"]
 
@@ -25,7 +25,8 @@ class RoleAssignmentOut(BaseModel):
 
 class UserOut(ORMModel):
     id: uuid.UUID
-    email: str
+    username: str
+    email: str | None
     full_name: str
     phone: str | None
     locale: str
@@ -41,7 +42,8 @@ class UserDetailOut(UserOut):
 
 
 class UserCreateIn(BaseModel):
-    email: EmailStr
+    username: Username
+    email: EmailStr | None = None
     full_name: str = Field(min_length=2, max_length=255)
     phone: str | None = Field(default=None, max_length=32)
     initial_password: str = Field(min_length=8, max_length=256,
@@ -51,6 +53,8 @@ class UserCreateIn(BaseModel):
 
 class UserUpdateIn(BaseModel):
     row_version: int
+    username: Username | None = None
+    email: EmailStr | None = None
     full_name: str | None = Field(default=None, min_length=2, max_length=255)
     phone: str | None = Field(default=None, max_length=32)
     locale: Literal["uz", "ru", "en"] | None = None

@@ -33,7 +33,7 @@ DEMO_UNIVERSITIES = [
     ("demo-tu", "DEMO Texnika universiteti", "DEMO-TU"),
     ("demo-pu", "DEMO Pedagogika universiteti", "DEMO-PU"),
 ]
-# (rol kodi, email prefiksi, F.I.Sh.)
+# (rol kodi, login prefiksi, F.I.Sh.) — login: <prefiks>.<universitet qisqa kodi>
 DEMO_USERS = [
     ("university_admin", "admin", "Demo Universitet Admini"),
     ("academic_office", "oquv", "Demo O‘quv bo‘limi xodimi"),
@@ -85,8 +85,8 @@ def seed(db: Session, password: str) -> None:
         raise SystemExit("Avval `python -m app.cli bootstrap` ni ishga tushiring")
     pw_hash = hash_password(password)
 
-    if db.scalar(select(User).where(User.email == "superadmin@uniload.example")) is None:
-        sa_user = User(university_id=None, email="superadmin@uniload.example", full_name="Demo Super Admin",
+    if db.scalar(select(User).where(User.username == "superadmin")) is None:
+        sa_user = User(university_id=None, username="superadmin", full_name="Demo Super Admin",
                        password_hash=pw_hash, is_platform_admin=True)
         db.add(sa_user)
         db.flush()
@@ -105,10 +105,10 @@ def seed(db: Session, password: str) -> None:
             db.add(Subscription(university_id=uni.id, plan_id=trial.id, status="active", starts_at=now,
                                 ends_at=now + timedelta(days=365)))
         for role_code, prefix, full_name in DEMO_USERS:
-            email = f"{prefix}@{code}.uniload.example"
-            if db.scalar(select(User).where(User.email == email)) is not None:
+            username = f"{prefix}.{code.removeprefix('demo-')}"
+            if db.scalar(select(User).where(User.username == username)) is not None:
                 continue
-            user = User(university_id=uni.id, email=email, full_name=full_name, password_hash=pw_hash)
+            user = User(university_id=uni.id, username=username, full_name=full_name, password_hash=pw_hash)
             db.add(user)
             db.flush()
             # Kafedra ko‘lami 2-bosqichda haqiqiy kafedra ID’siga bog‘lanadi; hozircha "self".

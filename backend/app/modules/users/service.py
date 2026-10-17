@@ -41,7 +41,8 @@ def list_users(ctx: Ctx, params: PageParams, q: str | None, is_active: bool | No
     stmt = select(User).where(User.university_id == ctx.university_id).order_by(User.full_name)
     if q:
         like = f"%{q.strip().lower()}%"
-        stmt = stmt.where(or_(func.lower(User.full_name).like(like), User.email.like(like)))
+        stmt = stmt.where(or_(func.lower(User.full_name).like(like), User.username.like(like),
+                              User.email.like(like)))
     if is_active is not None:
         stmt = stmt.where(User.is_active == is_active)
     return paginate(ctx.db, stmt, params, UserOut)
@@ -109,8 +110,9 @@ def _replace_roles(ctx: Ctx, user: User, items: list[RoleAssignmentIn]) -> None:
 
 def create_user(ctx: Ctx, body: UserCreateIn) -> UserDetailOut:
     validate_password_policy(body.initial_password)
-    email = body.email.strip().lower()
-    user = User(university_id=ctx.university_id, email=email, full_name=body.full_name.strip(),
+    email = body.email.strip().lower() if body.email else None
+    user = User(university_id=ctx.university_id, username=body.username, email=email,
+                full_name=body.full_name.strip(),
                 phone=body.phone, password_hash=hash_password(body.initial_password),
                 must_change_password=True)
     ctx.db.add(user)
@@ -133,6 +135,8 @@ def update_user(ctx: Ctx, user_id: uuid.UUID, body: UserUpdateIn) -> UserDetailO
     data = body.model_dump(exclude_unset=True, exclude={"row_version"})
     if data.get("is_active") is False and user.id == ctx.principal.user_id:
         raise Conflict("O‘zingizni bloklay olmaysiz", code="SELF_LOCKOUT")
+    if data.get("email"):
+        data["email"] = data["email"].strip().lower()
     for key, value in data.items():
         setattr(user, key, value)
     ctx.db.flush()

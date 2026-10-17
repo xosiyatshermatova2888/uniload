@@ -14,7 +14,7 @@ class Principal:
     user_id: uuid.UUID
     university_id: uuid.UUID | None
     is_platform_admin: bool
-    email: str
+    username: str
     full_name: str
     teacher_id: uuid.UUID | None = None
     grants: list[Grant] = field(default_factory=list)

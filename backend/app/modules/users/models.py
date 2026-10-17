@@ -13,13 +13,16 @@ class User(IdMixin, AuditMixin, Base):
     __tablename__ = "users"
     __table_args__ = (
         CheckConstraint("is_platform_admin OR university_id IS NOT NULL", name="tenant_required"),
-        CheckConstraint("email = lower(email)", name="email_lower"),
+        CheckConstraint("email IS NULL OR email = lower(email)", name="email_lower"),
+        CheckConstraint("username ~ '^[a-z0-9][a-z0-9._-]{2,63}$'", name="username_format"),
         Index("ix_users_university_active", "university_id", "is_active"),
     )
 
     university_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("universities.id", ondelete="RESTRICT"), index=True)
-    email: Mapped[str] = mapped_column(String(254), unique=True)
+    # Tizimga kirish logini (platforma bo‘yicha noyob). Email ixtiyoriy — parolni tiklash uchun.
+    username: Mapped[str] = mapped_column(String(64), unique=True)
+    email: Mapped[str | None] = mapped_column(String(254), unique=True)
     password_hash: Mapped[str] = mapped_column(Text)
     full_name: Mapped[str] = mapped_column(String(255))
     phone: Mapped[str | None] = mapped_column(String(32))
