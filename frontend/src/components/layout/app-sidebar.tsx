@@ -20,7 +20,7 @@ import {
 import { useT } from "@/i18n"
 import { useAuth } from "@/lib/auth"
 
-import { platformNav, settingsTabs, tenantNav, type NavItem } from "./nav"
+import { CURRENT_PHASE, platformNav, settingsTabs, tenantNav, type NavItem } from "./nav"
 
 export function AppSidebar() {
   const t = useT()
@@ -60,7 +60,7 @@ export function AppSidebar() {
               <SidebarGroupContent>
                 <SidebarMenu>
                   {items.map((item) => {
-                    const ready = item.phase <= 1
+                    const ready = item.phase <= CURRENT_PHASE
                     const active = pathname === item.href || pathname.startsWith(`${item.href}/`)
                     const label = t(item.key)
                     return (
@@ -91,7 +91,7 @@ export function AppSidebar() {
         })}
       </SidebarContent>
       <SidebarFooter className="px-3 pb-3 text-[11px] text-muted-foreground group-data-[collapsible=icon]:hidden">
-        v0.1 · 1-bosqich
+        v0.2 · 2-bosqich
       </SidebarFooter>
     </Sidebar>
   )

@@ -53,6 +53,7 @@ class Semester(IdMixin, AuditMixin, TenantMixin, Base):
         ForeignKeyConstraint(["university_id", "academic_year_id"],
                              ["academic_years.university_id", "academic_years.id"], ondelete="CASCADE"),
         UniqueConstraint("academic_year_id", "term"),
+        UniqueConstraint("academic_year_id", "id"),  # oqimlar uchun kompozit FK nishoni
         CheckConstraint("term IN (1, 2)", name="term"),
         CheckConstraint("ends_on > starts_on", name="dates"),
         CheckConstraint("weeks IS NULL OR weeks BETWEEN 1 AND 30", name="weeks"),

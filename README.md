@@ -3,7 +3,7 @@
 O‘zbekiston oliy ta’lim muassasalari uchun o‘quv yuklamalarini shakllantirish, taqsimlash va tasdiqlash platformasi (multi-tenant SaaS).
 
 - Arxitektura va reja: [docs/README.md](docs/README.md)
-- **Joriy holat: 1-bosqich** — arxitektura, DB sxemasi, autentifikatsiya, universitetlar va foydalanuvchilar, boshqaruv paneli, o‘quv yillari.
+- **Joriy holat: 2-bosqich** — 1-bosqich (auth, RBAC, tenantlar, o‘quv yillari) + fakultetlar, kafedralar, ta’lim yo‘nalishlari, fanlar, o‘quv rejalari (versiyalash), akademik guruhlar va oqimlar, professor-o‘qituvchilar, yillik bandlik, lavozim me’yorlari, o‘quv yilini nusxalash (kursni ko‘tarish bilan).
 
 ## Tuzilma
 
@@ -71,7 +71,7 @@ cd backend && .venv/Scripts/python -m pytest
 cd frontend && npm run typecheck && npm run lint
 ```
 
-Backend API o‘zgarsa, frontend tiplarini yangilash: `npm run gen:api`.
+Backend API o‘zgarsa, frontend tiplarini yangilash: `npm run gen:api` (backend virtual muhiti faollashtirilgan holda).
 
 ## Xavfsizlik bo‘yicha asosiy qarorlar
 

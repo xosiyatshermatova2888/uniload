@@ -30,8 +30,8 @@ class User(IdMixin, AuditMixin, Base):
     failed_login_count: Mapped[int] = mapped_column(default=0, server_default="0")
     locked_until: Mapped[datetime | None]
     last_login_at: Mapped[datetime | None]
-    # 2-bosqichda teachers jadvaliga FK bo‘ladi.
-    teacher_id: Mapped[uuid.UUID | None] = mapped_column(unique=True)
+    # Foydalanuvchi ↔ professor-o‘qituvchi profili (PO o‘z yuklamasini ko‘rishi uchun).
+    teacher_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("teachers.id", ondelete="SET NULL"), unique=True)
 
 
 class RefreshToken(Base):

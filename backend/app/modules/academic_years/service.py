@@ -5,6 +5,7 @@ from sqlalchemy import delete, select
 
 from app.core.deps import Ctx
 from app.core.errors import AppError, Conflict, Forbidden, NotFound, ValidationFailed
+from app.modules.academic_years import copy as year_copy
 from app.modules.academic_years import domain
 from app.modules.academic_years.models import AcademicYear, Semester
 from app.modules.academic_years.schemas import (
@@ -19,11 +20,11 @@ from app.modules.academic_years.schemas import (
 )
 from app.modules.audit import service as audit
 
-NOT_YET_AVAILABLE = [
-    "Lavozim me’yorlari (2-bosqich)",
-    "O‘qituvchilar bandligi (2-bosqich)",
-    "Akademik guruhlar va kursni ko‘tarish (2-bosqich)",
-    "Oqimlar (2-bosqich)",
+NOT_COPIED = [
+    "Oqimlar — har yili o‘quv reja bo‘yicha qayta tuziladi",
+    "Hisoblangan yuklama — har doim qayta hisoblanadi",
+    "Taqsimot — hisoblashdan keyin oldingi yil asosida tavsiya sifatida taklif qilinadi",
+    "Yangi 1-kurs guruhlari — qabul rejasi bo‘yicha qo‘lda yoki Excel orqali kiritiladi",
 ]
 
 
@@ -50,6 +51,15 @@ def get_year(ctx: Ctx, year_id: uuid.UUID) -> AcademicYear:
                                                     AcademicYear.university_id == ctx.university_id))
     if year is None:
         raise NotFound("O‘quv yili topilmadi")
+    return year
+
+
+def get_editable_year(ctx: Ctx, year_id: uuid.UUID) -> AcademicYear:
+    """Yilga bog‘liq ma’lumotlarni o‘zgartirishdan oldin: qulflangan yil — 409 (DB triggeri ham to‘sadi)."""
+    year = get_year(ctx, year_id)
+    if year.status in domain.LOCKED_STATUSES:
+        raise Conflict(f"O‘quv yili {year.label} “{domain.STATUS_LABELS[year.status]}” holatida — "
+                       "ma’lumotlarni o‘zgartirib bo‘lmaydi", code="YEAR_LOCKED")
     return year
 
 
@@ -97,13 +107,27 @@ def _plan(ctx: Ctx, body: AcademicYearCreateIn) -> tuple[CopyPreviewOut, Academi
     errors = domain.validate_semesters(specs, starts_on, ends_on)
     if errors:
         warnings.extend(errors)
+    report = None
+    if source is not None:
+        o = body.options
+        report = year_copy.run(ctx.db, university_id=ctx.university_id, source=source, target=None,
+                               norms=o.norms, employment=o.employment, groups=o.groups)
+        if report.graduates_skipped:
+            warnings.append(f"{len(report.graduates_skipped)} ta bitiruvchi guruh yangi yilga o‘tkazilmaydi.")
+        if report.employment_skipped_inactive:
+            warnings.append(f"{report.employment_skipped_inactive} ta nofaol o‘qituvchi bandligi ko‘chirilmaydi.")
+        if o.groups and report.groups:
+            warnings.append("Ko‘chirilgan guruhlar kontingenti “tekshirish kerak” deb belgilanadi.")
     preview = CopyPreviewOut(
         label=domain.label(body.start_year), already_exists=exists, mode=body.mode,
         source_label=source.label if source else None, starts_on=starts_on, ends_on=ends_on,
         semesters=[SemesterIn(term=s.term, name=s.name, starts_on=s.starts_on, ends_on=s.ends_on, weeks=s.weeks)
                    for s in specs],
-        will_copy={"semesters": len(specs) if source and body.options.semesters else 0},
-        not_yet_available=NOT_YET_AVAILABLE if body.mode == "copy" else [],
+        will_copy={"semesters": len(specs) if source and body.options.semesters else 0,
+                   "norms": report.norms if report else 0, "employment": report.employment if report else 0,
+                   "groups": report.groups if report else 0},
+        graduates_skipped=report.graduates_skipped if report else [],
+        not_copied=NOT_COPIED if body.mode == "copy" else [],
         warnings=warnings,
     )
     return preview, source
@@ -135,10 +159,16 @@ def create_year(ctx: Ctx, body: AcademicYearCreateIn) -> AcademicYearDetailOut:
         ctx.db.add(Semester(university_id=ctx.university_id, academic_year_id=year.id, term=s.term,
                             name=s.name, starts_on=s.starts_on, ends_on=s.ends_on, weeks=s.weeks))
     ctx.db.flush()
+    copied = {"semesters": plan.will_copy["semesters"]}
+    if source is not None:
+        o = body.options
+        report = year_copy.run(ctx.db, university_id=ctx.university_id, source=source, target=year,
+                               norms=o.norms, employment=o.employment, groups=o.groups)
+        copied |= report.as_dict()
     ctx.db.refresh(year)  # label — DB’da hisoblanadigan ustun
     audit.record_ctx(ctx, action="academic_year.created", entity_type="academic_year", entity_id=year.id,
                      academic_year_id=year.id,
-                     after={**audit.snapshot(year), "mode": body.mode, "copied": plan.will_copy})
+                     after={**audit.snapshot(year), "mode": body.mode, "copied": copied})
     ctx.db.commit()
     return detail(ctx, year)
 

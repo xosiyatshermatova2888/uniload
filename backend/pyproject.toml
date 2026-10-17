@@ -46,3 +46,4 @@ ignore = ["B008"]
 
 [tool.ruff.lint.per-file-ignores]
 "alembic/versions/*" = ["E501", "I001"]
+"tests/*" = ["E501"]

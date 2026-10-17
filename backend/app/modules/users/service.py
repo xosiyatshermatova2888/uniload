@@ -10,6 +10,7 @@ from app.core.schemas import Page, PageParams, paginate
 from app.core.security import hash_password, validate_password_policy
 from app.modules.audit import service as audit
 from app.modules.auth.service import revoke_all_sessions
+from app.modules.org.models import Department, Faculty
 from app.modules.users.models import Permission, Role, RolePermission, User, UserRole
 from app.modules.users.schemas import (
     RoleAssignmentIn,
@@ -77,8 +78,13 @@ def _validate_assignments(ctx: Ctx, items: list[RoleAssignmentIn]) -> list[tuple
             raise Forbidden("Super Admin rolini universitet foydalanuvchisiga berib bo‘lmaydi")
         if item.scope_type in ("university", "self") and item.scope_id is not None:
             raise ValidationFailed("Bu ko‘lam uchun scope_id ko‘rsatilmaydi", code="SCOPE_INVALID")
-        if item.scope_type in ("faculty", "department") and item.scope_id is None:
-            raise ValidationFailed("Fakultet/kafedra ko‘lami uchun scope_id majburiy", code="SCOPE_INVALID")
+        if item.scope_type in ("faculty", "department"):
+            if item.scope_id is None:
+                raise ValidationFailed("Fakultet/kafedra ko‘lami uchun scope_id majburiy", code="SCOPE_INVALID")
+            model = Faculty if item.scope_type == "faculty" else Department
+            target = ctx.db.get(model, item.scope_id)
+            if target is None or target.university_id != ctx.university_id:
+                raise ValidationFailed("Ko‘lam uchun tanlangan fakultet/kafedra topilmadi", code="SCOPE_NOT_FOUND")
         result.append((role, item))
     return result
 

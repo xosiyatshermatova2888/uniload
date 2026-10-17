@@ -39,7 +39,7 @@ export function CreateYearWizard({ open, onOpenChange, years }: {
   const [startYear, setStartYear] = useState<number>(suggested)
   const [mode, setMode] = useState<Mode>(years.length ? "copy" : "empty")
   const [sourceId, setSourceId] = useState<string>(years.find((y) => y.is_current)?.id ?? years[0]?.id ?? "")
-  const [copySemesters, setCopySemesters] = useState(true)
+  const [options, setOptions] = useState({ semesters: true, norms: true, employment: true, groups: true })
   const [preview, setPreview] = useState<Preview | null>(null)
   const [error, setError] = useState<string | null>(null)
 
@@ -47,7 +47,7 @@ export function CreateYearWizard({ open, onOpenChange, years }: {
     start_year: startYear,
     mode,
     source_year_id: mode === "copy" ? sourceId || null : null,
-    options: { semesters: copySemesters },
+    options,
   }
 
   function reset() {
@@ -151,16 +151,15 @@ export function CreateYearWizard({ open, onOpenChange, years }: {
           )}
 
           {step === 2 && (
-            <div className="grid gap-3">
-              <label className="flex items-center gap-3 rounded-lg border p-3 text-sm">
-                <Checkbox checked={copySemesters} onCheckedChange={(v) => setCopySemesters(v === true)} />
-                {t("years.wizard.copySemesters")}
-              </label>
-              <p className="pt-2 text-xs font-medium text-muted-foreground">{t("years.wizard.notYet")}:</p>
-              {["Lavozim me’yorlari", "O‘qituvchilar bandligi", "Akademik guruhlar (kursni ko‘tarish)", "Oqimlar"].map((label) => (
-                <label key={label} className="flex items-center gap-3 rounded-lg border border-dashed p-3 text-sm text-muted-foreground">
-                  <Checkbox disabled checked={false} /> {label}
-                  <span className="ml-auto text-[11px]">2-bosqich</span>
+            <div className="grid gap-2">
+              {(["semesters", "norms", "employment", "groups"] as const).map((key) => (
+                <label key={key} className="flex items-start gap-3 rounded-lg border p-3 text-sm">
+                  <Checkbox checked={options[key]} className="mt-0.5"
+                    onCheckedChange={(v) => setOptions((o) => ({ ...o, [key]: v === true }))} />
+                  <span>
+                    <span className="block font-medium">{t(`years.wizard.copy.${key}`)}</span>
+                    <span className="block text-xs text-muted-foreground">{t(`years.wizard.copyHint.${key}`)}</span>
+                  </span>
                 </label>
               ))}
             </div>
@@ -186,6 +185,27 @@ export function CreateYearWizard({ open, onOpenChange, years }: {
                   ))}
                 </ul>
               </div>
+              {preview.mode === "copy" && (
+                <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+                  {(["semesters", "norms", "employment", "groups"] as const).map((key) => (
+                    <div key={key} className="rounded-lg border p-2.5 text-center">
+                      <div className="text-lg font-semibold tabular-nums">{preview.will_copy[key] ?? 0}</div>
+                      <div className="text-[11px] text-muted-foreground">{t(`years.wizard.copy.${key}`)}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {preview.graduates_skipped.length > 0 && (
+                <p className="text-xs text-muted-foreground">
+                  {t("years.wizard.graduates")}: {preview.graduates_skipped.join(", ")}
+                </p>
+              )}
+              {preview.not_copied.length > 0 && (
+                <details className="rounded-lg border p-3 text-xs text-muted-foreground">
+                  <summary className="cursor-pointer font-medium text-foreground">{t("years.wizard.notCopied")}</summary>
+                  <ul className="mt-2 list-disc space-y-1 pl-4">{preview.not_copied.map((n) => <li key={n}>{n}</li>)}</ul>
+                </details>
+              )}
               {preview.warnings.map((w) => (
                 <div key={w} className="flex gap-2 rounded-lg bg-warning/10 p-3">
                   <AlertTriangle className="mt-0.5 size-4 shrink-0 text-warning" /> {w}

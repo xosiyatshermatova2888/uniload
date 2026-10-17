@@ -17,8 +17,10 @@ from sqlalchemy.orm import Session
 from app.core.config import get_settings
 from app.core.permissions import PERMISSIONS, SYSTEM_ROLES
 from app.core.security import hash_password
+from app.demo_seed import seed_reference
 from app.modules.academic_years import domain
 from app.modules.academic_years.models import AcademicYear, Semester
+from app.modules.curricula.service import ensure_lesson_types
 from app.modules.tenants.models import Plan, Subscription, University
 from app.modules.users.models import Permission, Role, RolePermission, User, UserRole
 
@@ -64,6 +66,9 @@ def bootstrap(db: Session) -> None:
         role.name, role.default_scope, role.is_system = role_def.name, role_def.default_scope, True
         db.execute(delete(RolePermission).where(RolePermission.role_id == role.id))
         db.add_all([RolePermission(role_id=role.id, permission_id=perm_ids[c]) for c in role_def.permissions])
+
+    for uni_id in db.scalars(select(University.id)):
+        ensure_lesson_types(db, uni_id)
 
     for code, name, limits, price in DEFAULT_PLANS:
         if db.scalar(select(Plan).where(Plan.code == code)) is None:
@@ -119,6 +124,11 @@ def seed(db: Session, password: str) -> None:
             for s in domain.default_semesters(start_year):
                 db.add(Semester(university_id=uni.id, academic_year_id=year.id, term=s.term, name=s.name,
                                 starts_on=s.starts_on, ends_on=s.ends_on))
+            db.flush()
+        year = db.scalar(select(AcademicYear).where(AcademicYear.university_id == uni.id,
+                                                    AcademicYear.start_year == start_year))
+        ensure_lesson_types(db, uni.id)
+        seed_reference(db, uni.id, year)
     db.commit()
     print("seed: demo ma’lumotlar tayyor (loginlar: README.md, Demo foydalanuvchilar)")
 

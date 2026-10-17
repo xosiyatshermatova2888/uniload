@@ -37,7 +37,9 @@ gantt
 
 **Qabul mezonlari:** demo foydalanuvchilar bilan kirish; UA foydalanuvchi va rol yarata oladi; OB 2027–2028 bo‘sh yilni yaratadi va holatlarni almashtira oladi; A universitet foydalanuvchisi B universitet yilini ko‘ra olmaydi (test); barcha o‘zgarishlar audit logda; Swagger ishlaydi.
 
-## 2-bosqich — Ma’lumotnomalar (≈ 3 hafta)
+## 2-bosqich — Ma’lumotnomalar (≈ 3 hafta) — ✅ bajarildi (2026-10-17)
+
+> Farqlar: oqimlar yil nusxalashda ko‘chirilmaydi (5.2 ga qarang); lavozim me’yorlari demo ma’lumotda ataylab bo‘sh — universitet hujjatidan kiritiladi; kafedra mudirini tanlash (`head_user_id`) UI’da hali yo‘q, API’da bor.
 
 Fakultetlar, kafedralar, yo‘nalishlar, fanlar katalogi, mashg‘ulot turlari, o‘quv rejalari (versiyalash, `CurriculumGrid`), guruhlar va oqimlar, o‘qituvchilar, yillik bandlik, lavozim me’yorlari. Nusxalash ustasi to‘liq ishlaydi (kursni ko‘tarish, bitiruvchilar, bandlik).
 

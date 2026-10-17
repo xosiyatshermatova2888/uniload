@@ -55,10 +55,12 @@ class AcademicYearDetailOut(AcademicYearOut):
 
 
 class CopyOptions(BaseModel):
-    """1-bosqichda faqat kalendar ko‘chiriladi. Guruhlar, bandlik, me’yorlar va oqimlar
-    2-bosqichda tegishli modullar bilan birga qo‘shiladi (docs/05, 5.2)."""
+    """Nimalar ko‘chiriladi (docs/05, 5.2). Oqimlar, taqsimot va hisoblangan yuklama ko‘chirilmaydi."""
 
     semesters: bool = True
+    norms: bool = True
+    employment: bool = True
+    groups: bool = True
 
 
 class AcademicYearCreateIn(BaseModel):
@@ -79,7 +81,8 @@ class CopyPreviewOut(BaseModel):
     ends_on: date
     semesters: list[SemesterIn]
     will_copy: dict[str, int]
-    not_yet_available: list[str]
+    graduates_skipped: list[str]
+    not_copied: list[str]
     warnings: list[str]
 
 

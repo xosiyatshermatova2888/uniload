@@ -11,7 +11,11 @@ from app.db.session import engine
 from app.modules.academic_years.api import router as years_router
 from app.modules.audit.api import router as audit_router
 from app.modules.auth.api import router as auth_router
+from app.modules.curricula.api import router as curricula_router
 from app.modules.dashboard.api import router as dashboard_router
+from app.modules.groups.api import router as groups_router
+from app.modules.org.api import router as org_router
+from app.modules.teachers.api import router as teachers_router
 from app.modules.tenants.api import platform_router
 from app.modules.tenants.api import router as university_router
 from app.modules.users.api import router as users_router
@@ -44,7 +48,7 @@ def create_app() -> FastAPI:
 
     api = APIRouter(prefix=API_PREFIX)
     for r in (auth_router, university_router, platform_router, users_router, years_router,
-              dashboard_router, audit_router):
+              dashboard_router, audit_router, org_router, curricula_router, groups_router, teachers_router):
         api.include_router(r)
 
     @api.get("/health", tags=["Tizim"], summary="Liveness / readiness")

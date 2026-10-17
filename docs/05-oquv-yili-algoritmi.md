@@ -41,7 +41,7 @@ Har bir o‘tish: ruxsat tekshiruvi → oldindan shartlar (masalan, `in_review` 
 | O‘qituvchilar bandligi (lavozim, stavka) | ✅ | Faol o‘qituvchilar uchun nusxa; muddati tugaganlar o‘tkazib yuboriladi |
 | Akademik guruhlar | ✅ | **Kursni ko‘tarish**: `course + 1`; bitiruvchi guruhlar (`course = duration_years`) ko‘chirilmaydi; kontingent nusxalanadi va `needs_review = true` |
 | Yangi 1-kurs guruhlari | ☐ | Qabul rejasidan qo‘lda/Excel orqali; eng so‘nggi tasdiqlangan o‘quv reja versiyasiga bog‘lanadi |
-| Oqimlar | ✅ | Tuzilma yangi guruh ID’lari bilan qayta quriladi (mapping orqali) |
+| Oqimlar | — | **Ko‘chirilmaydi**: kursi ko‘tarilgan guruhlar keyingi yilda boshqa fanlarni o‘qiydi, shuning uchun oqim (fan × semestr × guruhlar) har yili o‘quv reja bo‘yicha qayta tuziladi |
 | Taqsimot (kim nimani o‘qitgan) | ☐ | **To‘g‘ridan-to‘g‘ri ko‘chirilmaydi.** Hisoblashdan keyin “oldingi yil bo‘yicha tavsiya” sifatida taklif qilinadi |
 | Hisoblash qoidalari | — | Ko‘chirilmaydi: tenant darajasida, `effective_from/to` bo‘yicha yangi yilga avtomatik tanlanadi. Yangi yil sanasiga mos faol qoida bo‘lmasa — ogohlantirish |
 | Hisoblangan yuklama | — | Hech qachon ko‘chirilmaydi — har doim qayta hisoblanadi |

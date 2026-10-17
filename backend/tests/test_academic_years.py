@@ -63,8 +63,8 @@ def test_copy_year_shifts_semesters_and_keeps_source(client, tu_office, free_yea
     preview = client.post(f"{YEARS}/preview", headers=tu_office, json={
         "start_year": free_year + 1, "mode": "copy", "source_year_id": source["id"]})
     assert preview.status_code == 200
-    assert preview.json()["will_copy"] == {"semesters": 2}
-    assert preview.json()["not_yet_available"]
+    assert preview.json()["will_copy"]["semesters"] == 2
+    assert preview.json()["not_copied"]
     # Preview hech narsa yozmaydi.
     ids = [y["start_year"] for y in client.get(YEARS, headers=tu_office).json()]
     assert free_year + 1 not in ids

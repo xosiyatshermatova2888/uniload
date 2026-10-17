@@ -493,6 +493,506 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/faculties": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Fakultetlar */
+        get: operations["list_faculties_api_v1_faculties_get"];
+        put?: never;
+        /** Create Faculty */
+        post: operations["create_faculty_api_v1_faculties_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/faculties/{faculty_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Delete Faculty */
+        delete: operations["delete_faculty_api_v1_faculties__faculty_id__delete"];
+        options?: never;
+        head?: never;
+        /** Update Faculty */
+        patch: operations["update_faculty_api_v1_faculties__faculty_id__patch"];
+        trace?: never;
+    };
+    "/api/v1/departments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Kafedralar */
+        get: operations["list_departments_api_v1_departments_get"];
+        put?: never;
+        /** Create Department */
+        post: operations["create_department_api_v1_departments_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/departments/{department_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Delete Department */
+        delete: operations["delete_department_api_v1_departments__department_id__delete"];
+        options?: never;
+        head?: never;
+        /** Tahrirlash, nofaol qilish yoki boshqa kafedraga birlashtirish */
+        patch: operations["update_department_api_v1_departments__department_id__patch"];
+        trace?: never;
+    };
+    "/api/v1/programs": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Programs */
+        get: operations["list_programs_api_v1_programs_get"];
+        put?: never;
+        /** Create Program */
+        post: operations["create_program_api_v1_programs_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/programs/{program_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Delete Program */
+        delete: operations["delete_program_api_v1_programs__program_id__delete"];
+        options?: never;
+        head?: never;
+        /** Update Program */
+        patch: operations["update_program_api_v1_programs__program_id__patch"];
+        trace?: never;
+    };
+    "/api/v1/lesson-types": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Mashg‘ulot turlari */
+        get: operations["list_lesson_types_api_v1_lesson_types_get"];
+        put?: never;
+        /** Create Lesson Type */
+        post: operations["create_lesson_type_api_v1_lesson_types_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/lesson-types/{lesson_type_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Delete Lesson Type */
+        delete: operations["delete_lesson_type_api_v1_lesson_types__lesson_type_id__delete"];
+        options?: never;
+        head?: never;
+        /** Update Lesson Type */
+        patch: operations["update_lesson_type_api_v1_lesson_types__lesson_type_id__patch"];
+        trace?: never;
+    };
+    "/api/v1/subjects": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Fanlar katalogi */
+        get: operations["list_subjects_api_v1_subjects_get"];
+        put?: never;
+        /** Create Subject */
+        post: operations["create_subject_api_v1_subjects_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/subjects/{subject_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Delete Subject */
+        delete: operations["delete_subject_api_v1_subjects__subject_id__delete"];
+        options?: never;
+        head?: never;
+        /** Update Subject */
+        patch: operations["update_subject_api_v1_subjects__subject_id__patch"];
+        trace?: never;
+    };
+    "/api/v1/curricula": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** O‘quv rejalari */
+        get: operations["list_curricula_api_v1_curricula_get"];
+        put?: never;
+        /** Yangi o‘quv reja (qoralama) */
+        post: operations["create_curriculum_api_v1_curricula_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/curricula/{curriculum_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** O‘quv reja: semestrlar × fanlar × mashg‘ulot turlari */
+        get: operations["get_curriculum_api_v1_curricula__curriculum_id__get"];
+        put?: never;
+        post?: never;
+        /** Delete Curriculum */
+        delete: operations["delete_curriculum_api_v1_curricula__curriculum_id__delete"];
+        options?: never;
+        head?: never;
+        /** Update Curriculum */
+        patch: operations["update_curriculum_api_v1_curricula__curriculum_id__patch"];
+        trace?: never;
+    };
+    "/api/v1/curricula/{curriculum_id}/approve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Versiyani tasdiqlash (shundan keyin o‘zgarmaydi) */
+        post: operations["approve_curriculum_api_v1_curricula__curriculum_id__approve_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/curricula/{curriculum_id}/archive": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Archive Curriculum */
+        post: operations["archive_curriculum_api_v1_curricula__curriculum_id__archive_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/curricula/{curriculum_id}/new-version": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Tasdiqlangan rejadan yangi qoralama versiya */
+        post: operations["new_version_api_v1_curricula__curriculum_id__new_version_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/curricula/{curriculum_id}/subjects": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Add Subject */
+        post: operations["add_subject_api_v1_curricula__curriculum_id__subjects_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/curricula/{curriculum_id}/subjects/{entry_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Remove Subject */
+        delete: operations["remove_subject_api_v1_curricula__curriculum_id__subjects__entry_id__delete"];
+        options?: never;
+        head?: never;
+        /** Update Subject Entry */
+        patch: operations["update_subject_entry_api_v1_curricula__curriculum_id__subjects__entry_id__patch"];
+        trace?: never;
+    };
+    "/api/v1/years/{year_id}/groups": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** O‘quv yili guruhlari */
+        get: operations["list_groups_api_v1_years__year_id__groups_get"];
+        put?: never;
+        /** Create Group */
+        post: operations["create_group_api_v1_years__year_id__groups_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Kontingentni ommaviy yangilash */
+        patch: operations["bulk_update_api_v1_years__year_id__groups_patch"];
+        trace?: never;
+    };
+    "/api/v1/years/{year_id}/groups/{group_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Delete Group */
+        delete: operations["delete_group_api_v1_years__year_id__groups__group_id__delete"];
+        options?: never;
+        head?: never;
+        /** Update Group */
+        patch: operations["update_group_api_v1_years__year_id__groups__group_id__patch"];
+        trace?: never;
+    };
+    "/api/v1/years/{year_id}/streams": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Oqimlar */
+        get: operations["list_streams_api_v1_years__year_id__streams_get"];
+        put?: never;
+        /** Create Stream */
+        post: operations["create_stream_api_v1_years__year_id__streams_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/years/{year_id}/streams/{stream_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Delete Stream */
+        delete: operations["delete_stream_api_v1_years__year_id__streams__stream_id__delete"];
+        options?: never;
+        head?: never;
+        /** Update Stream */
+        patch: operations["update_stream_api_v1_years__year_id__streams__stream_id__patch"];
+        trace?: never;
+    };
+    "/api/v1/teachers/catalog": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Lavozimlar va bandlik turlari */
+        get: operations["catalog_api_v1_teachers_catalog_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/teachers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Teachers */
+        get: operations["list_teachers_api_v1_teachers_get"];
+        put?: never;
+        /** Create Teacher */
+        post: operations["create_teacher_api_v1_teachers_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/teachers/{teacher_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Teacher */
+        get: operations["get_teacher_api_v1_teachers__teacher_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Update Teacher */
+        patch: operations["update_teacher_api_v1_teachers__teacher_id__patch"];
+        trace?: never;
+    };
+    "/api/v1/teachers/{teacher_id}/history": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Yillar bo‘yicha bandlik tarixi */
+        get: operations["teacher_history_api_v1_teachers__teacher_id__history_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/years/{year_id}/employment": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Yillik bandlik */
+        get: operations["list_employment_api_v1_years__year_id__employment_get"];
+        put?: never;
+        /** Create Employment */
+        post: operations["create_employment_api_v1_years__year_id__employment_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/years/{year_id}/employment/{employment_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Delete Employment */
+        delete: operations["delete_employment_api_v1_years__year_id__employment__employment_id__delete"];
+        options?: never;
+        head?: never;
+        /** Update Employment */
+        patch: operations["update_employment_api_v1_years__year_id__employment__employment_id__patch"];
+        trace?: never;
+    };
+    "/api/v1/years/{year_id}/position-norms": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Lavozim me’yorlari */
+        get: operations["list_norms_api_v1_years__year_id__position_norms_get"];
+        /** Replace Norms */
+        put: operations["replace_norms_api_v1_years__year_id__position_norms_put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/health": {
         parameters: {
             query?: never;
@@ -528,7 +1028,10 @@ export interface components {
             source_year_id?: string | null;
             /**
              * @default {
-             *       "semesters": true
+             *       "semesters": true,
+             *       "norms": true,
+             *       "employment": true,
+             *       "groups": true
              *     }
              */
             options: components["schemas"]["CopyOptions"];
@@ -698,10 +1201,20 @@ export interface components {
             /** Reason */
             reason: string | null;
         };
+        /** CatalogOut */
+        CatalogOut: {
+            /** Positions */
+            positions: {
+                [key: string]: string;
+            };
+            /** Employment Types */
+            employment_types: {
+                [key: string]: string;
+            };
+        };
         /**
          * CopyOptions
-         * @description 1-bosqichda faqat kalendar ko‘chiriladi. Guruhlar, bandlik, me’yorlar va oqimlar
-         *     2-bosqichda tegishli modullar bilan birga qo‘shiladi (docs/05, 5.2).
+         * @description Nimalar ko‘chiriladi (docs/05, 5.2). Oqimlar, taqsimot va hisoblangan yuklama ko‘chirilmaydi.
          */
         CopyOptions: {
             /**
@@ -709,6 +1222,21 @@ export interface components {
              * @default true
              */
             semesters: boolean;
+            /**
+             * Norms
+             * @default true
+             */
+            norms: boolean;
+            /**
+             * Employment
+             * @default true
+             */
+            employment: boolean;
+            /**
+             * Groups
+             * @default true
+             */
+            groups: boolean;
         };
         /** CopyPreviewOut */
         CopyPreviewOut: {
@@ -736,10 +1264,258 @@ export interface components {
             will_copy: {
                 [key: string]: number;
             };
-            /** Not Yet Available */
-            not_yet_available: string[];
+            /** Graduates Skipped */
+            graduates_skipped: string[];
+            /** Not Copied */
+            not_copied: string[];
             /** Warnings */
             warnings: string[];
+        };
+        /** CurriculumApproveIn */
+        CurriculumApproveIn: {
+            /** Row Version */
+            row_version: number;
+            /**
+             * Approval Doc
+             * @description Tasdiqlovchi hujjat: buyruq raqami va sanasi
+             */
+            approval_doc: string;
+        };
+        /** CurriculumDetailOut */
+        CurriculumDetailOut: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Education Program Id
+             * Format: uuid
+             */
+            education_program_id: string;
+            /**
+             * Education Form
+             * @enum {string}
+             */
+            education_form: "full_time" | "part_time" | "evening" | "distance";
+            /** Admission Year */
+            admission_year: number;
+            /** Version */
+            version: number;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "draft" | "approved" | "archived";
+            /** Title */
+            title: string | null;
+            /** Approval Doc */
+            approval_doc: string | null;
+            /** Approved At */
+            approved_at: string | null;
+            /** Based On Id */
+            based_on_id: string | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Row Version */
+            row_version: number;
+            /**
+             * Subjects Count
+             * @default 0
+             */
+            subjects_count: number;
+            /** Total Credits */
+            total_credits?: string | null;
+            /** Duration Years */
+            duration_years: number;
+            /** Subjects */
+            subjects: components["schemas"]["CurriculumSubjectOut"][];
+            /** Totals By Semester */
+            totals_by_semester: {
+                [key: string]: {
+                    [key: string]: string;
+                };
+            };
+        };
+        /** CurriculumIn */
+        CurriculumIn: {
+            /**
+             * Education Program Id
+             * Format: uuid
+             */
+            education_program_id: string;
+            /**
+             * Education Form
+             * @default full_time
+             * @enum {string}
+             */
+            education_form: "full_time" | "part_time" | "evening" | "distance";
+            /** Admission Year */
+            admission_year: number;
+            /** Title */
+            title?: string | null;
+            /** Approval Doc */
+            approval_doc?: string | null;
+        };
+        /** CurriculumOut */
+        CurriculumOut: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Education Program Id
+             * Format: uuid
+             */
+            education_program_id: string;
+            /**
+             * Education Form
+             * @enum {string}
+             */
+            education_form: "full_time" | "part_time" | "evening" | "distance";
+            /** Admission Year */
+            admission_year: number;
+            /** Version */
+            version: number;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "draft" | "approved" | "archived";
+            /** Title */
+            title: string | null;
+            /** Approval Doc */
+            approval_doc: string | null;
+            /** Approved At */
+            approved_at: string | null;
+            /** Based On Id */
+            based_on_id: string | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Row Version */
+            row_version: number;
+            /**
+             * Subjects Count
+             * @default 0
+             */
+            subjects_count: number;
+            /** Total Credits */
+            total_credits?: string | null;
+        };
+        /** CurriculumSubjectIn */
+        CurriculumSubjectIn: {
+            /**
+             * Subject Id
+             * Format: uuid
+             */
+            subject_id: string;
+            /** Semester No */
+            semester_no: number;
+            /** Credits */
+            credits?: number | string | null;
+            /**
+             * Department Id
+             * @description Bo‘sh bo‘lsa — fanning asosiy kafedrasi
+             */
+            department_id?: string | null;
+            /**
+             * Control Type
+             * @default exam
+             * @enum {string}
+             */
+            control_type: "exam" | "credit_test" | "none";
+            /**
+             * Is Elective
+             * @default false
+             */
+            is_elective: boolean;
+            /** Elective Group */
+            elective_group?: string | null;
+            /**
+             * Hours
+             * @description Mashg‘ulot turi kodi → soat
+             */
+            hours?: {
+                [key: string]: number | string;
+            };
+        };
+        /** CurriculumSubjectOut */
+        CurriculumSubjectOut: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Subject Id
+             * Format: uuid
+             */
+            subject_id: string;
+            /** Subject Code */
+            subject_code: string;
+            /** Subject Name */
+            subject_name: string;
+            /** Semester No */
+            semester_no: number;
+            /** Credits */
+            credits: string | null;
+            /**
+             * Department Id
+             * Format: uuid
+             */
+            department_id: string;
+            /**
+             * Control Type
+             * @enum {string}
+             */
+            control_type: "exam" | "credit_test" | "none";
+            /** Is Elective */
+            is_elective: boolean;
+            /** Elective Group */
+            elective_group: string | null;
+            /** Row Version */
+            row_version: number;
+            /** Hours */
+            hours: {
+                [key: string]: string;
+            };
+        };
+        /** CurriculumSubjectUpdateIn */
+        CurriculumSubjectUpdateIn: {
+            /** Row Version */
+            row_version: number;
+            /** Semester No */
+            semester_no?: number | null;
+            /** Credits */
+            credits?: number | string | null;
+            /** Department Id */
+            department_id?: string | null;
+            /** Control Type */
+            control_type?: ("exam" | "credit_test" | "none") | null;
+            /** Is Elective */
+            is_elective?: boolean | null;
+            /** Elective Group */
+            elective_group?: string | null;
+            /** Hours */
+            hours?: {
+                [key: string]: number | string;
+            } | null;
+        };
+        /** CurriculumUpdateIn */
+        CurriculumUpdateIn: {
+            /** Row Version */
+            row_version: number;
+            /** Title */
+            title?: string | null;
+            /** Approval Doc */
+            approval_doc?: string | null;
         };
         /** DashboardOut */
         DashboardOut: {
@@ -765,6 +1541,210 @@ export interface components {
             /** Overloaded Teachers */
             overloaded_teachers?: number | null;
         };
+        /** DepartmentIn */
+        DepartmentIn: {
+            /**
+             * Faculty Id
+             * Format: uuid
+             */
+            faculty_id: string;
+            /** Code */
+            code: string;
+            /** Name */
+            name: string;
+            /** Head User Id */
+            head_user_id?: string | null;
+            /**
+             * Is Active
+             * @default true
+             */
+            is_active: boolean;
+        };
+        /** DepartmentOut */
+        DepartmentOut: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Faculty Id
+             * Format: uuid
+             */
+            faculty_id: string;
+            /** Code */
+            code: string;
+            /** Name */
+            name: string;
+            /** Head User Id */
+            head_user_id: string | null;
+            /** Is Active */
+            is_active: boolean;
+            /** Merged Into Id */
+            merged_into_id: string | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Row Version */
+            row_version: number;
+        };
+        /** DepartmentUpdateIn */
+        DepartmentUpdateIn: {
+            /** Row Version */
+            row_version: number;
+            /** Faculty Id */
+            faculty_id?: string | null;
+            /** Code */
+            code?: string | null;
+            /** Name */
+            name?: string | null;
+            /** Head User Id */
+            head_user_id?: string | null;
+            /** Is Active */
+            is_active?: boolean | null;
+            /** Merged Into Id */
+            merged_into_id?: string | null;
+        };
+        /** EmploymentIn */
+        EmploymentIn: {
+            /**
+             * Teacher Id
+             * Format: uuid
+             */
+            teacher_id: string;
+            /**
+             * Department Id
+             * Format: uuid
+             */
+            department_id: string;
+            /**
+             * Position Code
+             * @enum {string}
+             */
+            position_code: "assistant" | "senior_teacher" | "docent" | "professor" | "department_head";
+            /**
+             * Employment Type
+             * @default main
+             * @enum {string}
+             */
+            employment_type: "main" | "internal_part_time" | "external_part_time" | "hourly";
+            /** Rate */
+            rate: number | string;
+            /** Starts On */
+            starts_on?: string | null;
+            /** Ends On */
+            ends_on?: string | null;
+        };
+        /** EmploymentOut */
+        EmploymentOut: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Academic Year Id
+             * Format: uuid
+             */
+            academic_year_id: string;
+            /**
+             * Teacher Id
+             * Format: uuid
+             */
+            teacher_id: string;
+            /**
+             * Teacher Name
+             * @default
+             */
+            teacher_name: string;
+            /**
+             * Department Id
+             * Format: uuid
+             */
+            department_id: string;
+            /** Position Code */
+            position_code: string;
+            /** Employment Type */
+            employment_type: string;
+            /** Rate */
+            rate: string;
+            /** Norm Hours */
+            norm_hours: string | null;
+            /** Starts On */
+            starts_on: string | null;
+            /** Ends On */
+            ends_on: string | null;
+            /** Row Version */
+            row_version: number;
+        };
+        /** EmploymentUpdateIn */
+        EmploymentUpdateIn: {
+            /** Row Version */
+            row_version: number;
+            /** Department Id */
+            department_id?: string | null;
+            /** Position Code */
+            position_code?: ("assistant" | "senior_teacher" | "docent" | "professor" | "department_head") | null;
+            /** Employment Type */
+            employment_type?: ("main" | "internal_part_time" | "external_part_time" | "hourly") | null;
+            /** Rate */
+            rate?: number | string | null;
+            /** Starts On */
+            starts_on?: string | null;
+            /** Ends On */
+            ends_on?: string | null;
+        };
+        /** FacultyIn */
+        FacultyIn: {
+            /** Code */
+            code: string;
+            /** Name */
+            name: string;
+            /**
+             * Is Active
+             * @default true
+             */
+            is_active: boolean;
+        };
+        /** FacultyOut */
+        FacultyOut: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Code */
+            code: string;
+            /** Name */
+            name: string;
+            /** Is Active */
+            is_active: boolean;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Row Version */
+            row_version: number;
+            /**
+             * Departments Count
+             * @default 0
+             */
+            departments_count: number;
+        };
+        /** FacultyUpdateIn */
+        FacultyUpdateIn: {
+            /** Row Version */
+            row_version: number;
+            /** Code */
+            code?: string | null;
+            /** Name */
+            name?: string | null;
+            /** Is Active */
+            is_active?: boolean | null;
+        };
         /** FirstAdminIn */
         FirstAdminIn: {
             /**
@@ -777,10 +1757,208 @@ export interface components {
             /** Initial Password */
             initial_password: string;
         };
+        /** GroupBulkIn */
+        GroupBulkIn: {
+            /** Items */
+            items: components["schemas"]["GroupBulkItem"][];
+        };
+        /** GroupBulkItem */
+        GroupBulkItem: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Row Version */
+            row_version: number;
+            /** Student Count */
+            student_count: number;
+            /** Budget Count */
+            budget_count?: number | null;
+            /** Contract Count */
+            contract_count?: number | null;
+            /** Subgroup Count */
+            subgroup_count?: number | null;
+        };
+        /** GroupIn */
+        GroupIn: {
+            /**
+             * Curriculum Id
+             * Format: uuid
+             */
+            curriculum_id: string;
+            /** Code */
+            code: string;
+            /** Course */
+            course: number;
+            /**
+             * Language
+             * @default uz
+             * @enum {string}
+             */
+            language: "uz" | "ru" | "en" | "kk" | "tj" | "tk" | "kaa";
+            /**
+             * Student Count
+             * @default 0
+             */
+            student_count: number;
+            /** Budget Count */
+            budget_count?: number | null;
+            /** Contract Count */
+            contract_count?: number | null;
+            /**
+             * Subgroup Count
+             * @default 1
+             */
+            subgroup_count: number;
+        };
+        /** GroupOut */
+        GroupOut: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Curriculum Id
+             * Format: uuid
+             */
+            curriculum_id: string;
+            /** Code */
+            code: string;
+            /** Course */
+            course: number;
+            /** Language */
+            language: string;
+            /** Student Count */
+            student_count: number;
+            /** Budget Count */
+            budget_count: number | null;
+            /** Contract Count */
+            contract_count: number | null;
+            /** Subgroup Count */
+            subgroup_count: number;
+            /** Source Group Id */
+            source_group_id: string | null;
+            /** Needs Review */
+            needs_review: boolean;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Row Version */
+            row_version: number;
+        };
+        /** GroupUpdateIn */
+        GroupUpdateIn: {
+            /** Row Version */
+            row_version: number;
+            /** Curriculum Id */
+            curriculum_id?: string | null;
+            /** Code */
+            code?: string | null;
+            /** Course */
+            course?: number | null;
+            /** Language */
+            language?: ("uz" | "ru" | "en" | "kk" | "tj" | "tk" | "kaa") | null;
+            /** Student Count */
+            student_count?: number | null;
+            /** Budget Count */
+            budget_count?: number | null;
+            /** Contract Count */
+            contract_count?: number | null;
+            /** Subgroup Count */
+            subgroup_count?: number | null;
+            /** Needs Review */
+            needs_review?: boolean | null;
+        };
         /** HTTPValidationError */
         HTTPValidationError: {
             /** Detail */
             detail?: components["schemas"]["ValidationError"][];
+        };
+        /** HistoryItem */
+        HistoryItem: {
+            /**
+             * Academic Year Id
+             * Format: uuid
+             */
+            academic_year_id: string;
+            /** Year Label */
+            year_label: string;
+            /** Year Status */
+            year_status: string;
+            /**
+             * Department Id
+             * Format: uuid
+             */
+            department_id: string;
+            /** Position Code */
+            position_code: string;
+            /** Employment Type */
+            employment_type: string;
+            /** Rate */
+            rate: string;
+            /** Norm Hours */
+            norm_hours: string | null;
+        };
+        /** LessonTypeIn */
+        LessonTypeIn: {
+            /** Code */
+            code: string;
+            /** Name */
+            name: string;
+            /**
+             * Is Auditorium
+             * @default false
+             */
+            is_auditorium: boolean;
+            /**
+             * Counts In Workload
+             * @default true
+             */
+            counts_in_workload: boolean;
+            /**
+             * Sort Order
+             * @default 100
+             */
+            sort_order: number;
+        };
+        /** LessonTypeOut */
+        LessonTypeOut: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Code */
+            code: string;
+            /** Name */
+            name: string;
+            /** Is Auditorium */
+            is_auditorium: boolean;
+            /** Counts In Workload */
+            counts_in_workload: boolean;
+            /** Is System */
+            is_system: boolean;
+            /** Sort Order */
+            sort_order: number;
+            /** Row Version */
+            row_version: number;
+        };
+        /** LessonTypeUpdateIn */
+        LessonTypeUpdateIn: {
+            /** Row Version */
+            row_version: number;
+            /** Name */
+            name?: string | null;
+            /** Is Auditorium */
+            is_auditorium?: boolean | null;
+            /** Counts In Workload */
+            counts_in_workload?: boolean | null;
+            /** Sort Order */
+            sort_order?: number | null;
         };
         /** LoginIn */
         LoginIn: {
@@ -940,6 +2118,121 @@ export interface components {
             subscription_status: string | null;
             /** Plan Code */
             plan_code: string | null;
+        };
+        /** PositionNormIn */
+        PositionNormIn: {
+            /**
+             * Position Code
+             * @enum {string}
+             */
+            position_code: "assistant" | "senior_teacher" | "docent" | "professor" | "department_head";
+            /** Norm Hours Per Rate */
+            norm_hours_per_rate?: number | string | null;
+            /** Max Overload Pct */
+            max_overload_pct?: number | string | null;
+            /** Source Document */
+            source_document?: string | null;
+        };
+        /** PositionNormOut */
+        PositionNormOut: {
+            /** Position Code */
+            position_code: string;
+            /**
+             * Position Name
+             * @default
+             */
+            position_name: string;
+            /** Norm Hours Per Rate */
+            norm_hours_per_rate: string | null;
+            /** Max Overload Pct */
+            max_overload_pct: string | null;
+            /** Source Document */
+            source_document: string | null;
+            /** Needs Review */
+            needs_review: boolean;
+        };
+        /** PositionNormsIn */
+        PositionNormsIn: {
+            /** Norms */
+            norms: components["schemas"]["PositionNormIn"][];
+        };
+        /** ProgramIn */
+        ProgramIn: {
+            /**
+             * Department Id
+             * Format: uuid
+             */
+            department_id: string;
+            /** Code */
+            code: string;
+            /** Name */
+            name: string;
+            /**
+             * Degree
+             * @default bachelor
+             * @enum {string}
+             */
+            degree: "bachelor" | "master";
+            /**
+             * Duration Years
+             * @default 4
+             */
+            duration_years: number;
+            /**
+             * Is Active
+             * @default true
+             */
+            is_active: boolean;
+        };
+        /** ProgramOut */
+        ProgramOut: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Department Id
+             * Format: uuid
+             */
+            department_id: string;
+            /** Code */
+            code: string;
+            /** Name */
+            name: string;
+            /**
+             * Degree
+             * @enum {string}
+             */
+            degree: "bachelor" | "master";
+            /** Duration Years */
+            duration_years: number;
+            /** Is Active */
+            is_active: boolean;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Row Version */
+            row_version: number;
+        };
+        /** ProgramUpdateIn */
+        ProgramUpdateIn: {
+            /** Row Version */
+            row_version: number;
+            /** Department Id */
+            department_id?: string | null;
+            /** Code */
+            code?: string | null;
+            /** Name */
+            name?: string | null;
+            /** Degree */
+            degree?: ("bachelor" | "master") | null;
+            /** Duration Years */
+            duration_years?: number | null;
+            /** Is Active */
+            is_active?: boolean | null;
         };
         /** RoleAssignmentIn */
         RoleAssignmentIn: {
@@ -1103,6 +2396,130 @@ export interface components {
             /** Semesters */
             semesters: components["schemas"]["SemesterIn"][];
         };
+        /** StreamIn */
+        StreamIn: {
+            /** Name */
+            name: string;
+            /**
+             * Semester Id
+             * Format: uuid
+             */
+            semester_id: string;
+            /**
+             * Subject Id
+             * Format: uuid
+             */
+            subject_id: string;
+            /**
+             * Lesson Type Id
+             * Format: uuid
+             */
+            lesson_type_id: string;
+            /** Group Ids */
+            group_ids: string[];
+        };
+        /** StreamOut */
+        StreamOut: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Name */
+            name: string;
+            /**
+             * Semester Id
+             * Format: uuid
+             */
+            semester_id: string;
+            /**
+             * Subject Id
+             * Format: uuid
+             */
+            subject_id: string;
+            /**
+             * Lesson Type Id
+             * Format: uuid
+             */
+            lesson_type_id: string;
+            /** Group Ids */
+            group_ids: string[];
+            /** Student Count */
+            student_count: number;
+            /** Row Version */
+            row_version: number;
+        };
+        /** StreamUpdateIn */
+        StreamUpdateIn: {
+            /** Row Version */
+            row_version: number;
+            /** Name */
+            name?: string | null;
+            /** Group Ids */
+            group_ids?: string[] | null;
+        };
+        /** SubjectIn */
+        SubjectIn: {
+            /** Code */
+            code: string;
+            /** Name Uz */
+            name_uz: string;
+            /** Name Ru */
+            name_ru?: string | null;
+            /** Name En */
+            name_en?: string | null;
+            /** Default Department Id */
+            default_department_id?: string | null;
+            /**
+             * Is Active
+             * @default true
+             */
+            is_active: boolean;
+        };
+        /** SubjectOut */
+        SubjectOut: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Code */
+            code: string;
+            /** Name Uz */
+            name_uz: string;
+            /** Name Ru */
+            name_ru: string | null;
+            /** Name En */
+            name_en: string | null;
+            /** Default Department Id */
+            default_department_id: string | null;
+            /** Is Active */
+            is_active: boolean;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Row Version */
+            row_version: number;
+        };
+        /** SubjectUpdateIn */
+        SubjectUpdateIn: {
+            /** Row Version */
+            row_version: number;
+            /** Code */
+            code?: string | null;
+            /** Name Uz */
+            name_uz?: string | null;
+            /** Name Ru */
+            name_ru?: string | null;
+            /** Name En */
+            name_en?: string | null;
+            /** Default Department Id */
+            default_department_id?: string | null;
+            /** Is Active */
+            is_active?: boolean | null;
+        };
         /** SubscriptionCreateIn */
         SubscriptionCreateIn: {
             /**
@@ -1161,6 +2578,99 @@ export interface components {
             status?: ("trial" | "active" | "past_due" | "canceled") | null;
             /** Ends At */
             ends_at?: string | null;
+        };
+        /** TeacherIn */
+        TeacherIn: {
+            /** Last Name */
+            last_name: string;
+            /** First Name */
+            first_name: string;
+            /** Middle Name */
+            middle_name?: string | null;
+            /** Employee No */
+            employee_no: string;
+            /**
+             * Academic Degree
+             * @default none
+             * @enum {string}
+             */
+            academic_degree: "none" | "phd" | "dsc";
+            /**
+             * Academic Title
+             * @default none
+             * @enum {string}
+             */
+            academic_title: "none" | "docent" | "professor" | "senior_researcher";
+            /** Email */
+            email?: string | null;
+            /** Phone */
+            phone?: string | null;
+            /**
+             * Is Active
+             * @default true
+             */
+            is_active: boolean;
+        };
+        /** TeacherOut */
+        TeacherOut: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Last Name */
+            last_name: string;
+            /** First Name */
+            first_name: string;
+            /** Middle Name */
+            middle_name: string | null;
+            /**
+             * Full Name
+             * @default
+             */
+            full_name: string;
+            /** Employee No */
+            employee_no: string;
+            /** Academic Degree */
+            academic_degree: string;
+            /** Academic Title */
+            academic_title: string;
+            /** Email */
+            email: string | null;
+            /** Phone */
+            phone: string | null;
+            /** Is Active */
+            is_active: boolean;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Row Version */
+            row_version: number;
+        };
+        /** TeacherUpdateIn */
+        TeacherUpdateIn: {
+            /** Row Version */
+            row_version: number;
+            /** Last Name */
+            last_name?: string | null;
+            /** First Name */
+            first_name?: string | null;
+            /** Middle Name */
+            middle_name?: string | null;
+            /** Employee No */
+            employee_no?: string | null;
+            /** Academic Degree */
+            academic_degree?: ("none" | "phd" | "dsc") | null;
+            /** Academic Title */
+            academic_title?: ("none" | "docent" | "professor" | "senior_researcher") | null;
+            /** Email */
+            email?: string | null;
+            /** Phone */
+            phone?: string | null;
+            /** Is Active */
+            is_active?: boolean | null;
         };
         /** TokenOut */
         TokenOut: {
@@ -1395,6 +2905,11 @@ export interface components {
             input?: unknown;
             /** Context */
             ctx?: Record<string, never>;
+        };
+        /** VersionIn */
+        VersionIn: {
+            /** Row Version */
+            row_version: number;
         };
     };
     responses: never;
@@ -2633,6 +4148,1698 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["Page_AuditLogOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_faculties_api_v1_faculties_get: {
+        parameters: {
+            query?: {
+                q?: string | null;
+                is_active?: boolean | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FacultyOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_faculty_api_v1_faculties_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FacultyIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FacultyOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_faculty_api_v1_faculties__faculty_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                faculty_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_faculty_api_v1_faculties__faculty_id__patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                faculty_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FacultyUpdateIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FacultyOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_departments_api_v1_departments_get: {
+        parameters: {
+            query?: {
+                q?: string | null;
+                faculty_id?: string | null;
+                is_active?: boolean | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DepartmentOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_department_api_v1_departments_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DepartmentIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DepartmentOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_department_api_v1_departments__department_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                department_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_department_api_v1_departments__department_id__patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                department_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DepartmentUpdateIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DepartmentOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_programs_api_v1_programs_get: {
+        parameters: {
+            query?: {
+                q?: string | null;
+                department_id?: string | null;
+                degree?: ("bachelor" | "master") | null;
+                is_active?: boolean | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProgramOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_program_api_v1_programs_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ProgramIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProgramOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_program_api_v1_programs__program_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                program_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_program_api_v1_programs__program_id__patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                program_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ProgramUpdateIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProgramOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_lesson_types_api_v1_lesson_types_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LessonTypeOut"][];
+                };
+            };
+        };
+    };
+    create_lesson_type_api_v1_lesson_types_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LessonTypeIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LessonTypeOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_lesson_type_api_v1_lesson_types__lesson_type_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                lesson_type_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_lesson_type_api_v1_lesson_types__lesson_type_id__patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                lesson_type_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LessonTypeUpdateIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LessonTypeOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_subjects_api_v1_subjects_get: {
+        parameters: {
+            query?: {
+                q?: string | null;
+                department_id?: string | null;
+                is_active?: boolean | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SubjectOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_subject_api_v1_subjects_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SubjectIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SubjectOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_subject_api_v1_subjects__subject_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                subject_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_subject_api_v1_subjects__subject_id__patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                subject_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SubjectUpdateIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SubjectOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_curricula_api_v1_curricula_get: {
+        parameters: {
+            query?: {
+                program_id?: string | null;
+                status?: ("draft" | "approved" | "archived") | null;
+                admission_year?: number | null;
+                education_form?: ("full_time" | "part_time" | "evening" | "distance") | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CurriculumOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_curriculum_api_v1_curricula_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CurriculumIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CurriculumDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_curriculum_api_v1_curricula__curriculum_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                curriculum_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CurriculumDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_curriculum_api_v1_curricula__curriculum_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                curriculum_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_curriculum_api_v1_curricula__curriculum_id__patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                curriculum_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CurriculumUpdateIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CurriculumDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    approve_curriculum_api_v1_curricula__curriculum_id__approve_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                curriculum_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CurriculumApproveIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CurriculumDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    archive_curriculum_api_v1_curricula__curriculum_id__archive_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                curriculum_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["VersionIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CurriculumDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    new_version_api_v1_curricula__curriculum_id__new_version_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                curriculum_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CurriculumDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    add_subject_api_v1_curricula__curriculum_id__subjects_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                curriculum_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CurriculumSubjectIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CurriculumDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    remove_subject_api_v1_curricula__curriculum_id__subjects__entry_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                curriculum_id: string;
+                entry_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CurriculumDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_subject_entry_api_v1_curricula__curriculum_id__subjects__entry_id__patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                curriculum_id: string;
+                entry_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CurriculumSubjectUpdateIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CurriculumDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_groups_api_v1_years__year_id__groups_get: {
+        parameters: {
+            query?: {
+                q?: string | null;
+                curriculum_id?: string | null;
+                course?: number | null;
+                needs_review?: boolean | null;
+            };
+            header?: never;
+            path: {
+                year_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GroupOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_group_api_v1_years__year_id__groups_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                year_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GroupIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GroupOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    bulk_update_api_v1_years__year_id__groups_patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                year_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GroupBulkIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GroupOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_group_api_v1_years__year_id__groups__group_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                year_id: string;
+                group_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_group_api_v1_years__year_id__groups__group_id__patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                year_id: string;
+                group_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GroupUpdateIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GroupOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_streams_api_v1_years__year_id__streams_get: {
+        parameters: {
+            query?: {
+                subject_id?: string | null;
+            };
+            header?: never;
+            path: {
+                year_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StreamOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_stream_api_v1_years__year_id__streams_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                year_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["StreamIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StreamOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_stream_api_v1_years__year_id__streams__stream_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                year_id: string;
+                stream_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_stream_api_v1_years__year_id__streams__stream_id__patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                year_id: string;
+                stream_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["StreamUpdateIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StreamOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    catalog_api_v1_teachers_catalog_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CatalogOut"];
+                };
+            };
+        };
+    };
+    list_teachers_api_v1_teachers_get: {
+        parameters: {
+            query?: {
+                q?: string | null;
+                is_active?: boolean | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TeacherOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_teacher_api_v1_teachers_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TeacherIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TeacherOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_teacher_api_v1_teachers__teacher_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                teacher_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TeacherOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_teacher_api_v1_teachers__teacher_id__patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                teacher_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TeacherUpdateIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TeacherOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    teacher_history_api_v1_teachers__teacher_id__history_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                teacher_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HistoryItem"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_employment_api_v1_years__year_id__employment_get: {
+        parameters: {
+            query?: {
+                department_id?: string | null;
+                teacher_id?: string | null;
+            };
+            header?: never;
+            path: {
+                year_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EmploymentOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_employment_api_v1_years__year_id__employment_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                year_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EmploymentIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EmploymentOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_employment_api_v1_years__year_id__employment__employment_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                year_id: string;
+                employment_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_employment_api_v1_years__year_id__employment__employment_id__patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                year_id: string;
+                employment_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EmploymentUpdateIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EmploymentOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_norms_api_v1_years__year_id__position_norms_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                year_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PositionNormOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    replace_norms_api_v1_years__year_id__position_norms_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                year_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PositionNormsIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PositionNormOut"][];
                 };
             };
             /** @description Validation Error */

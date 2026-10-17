@@ -79,12 +79,20 @@ def _db_error(request: Request, exc: DBAPIError) -> JSONResponse:
     if sqlstate == "UL001":
         msg = getattr(diag, "message_primary", None) or "O‘quv yili qulflangan"
         return problem(request, 409, "YEAR_LOCKED", "O‘quv yili qulflangan", msg)
+    if sqlstate == "UL002":
+        msg = getattr(diag, "message_primary", None) or "O‘quv reja qulflangan"
+        return problem(request, 409, "CURRICULUM_LOCKED", "O‘quv reja qulflangan", msg)
     if sqlstate == "23505":
         return problem(request, 409, "DUPLICATE", "Bunday yozuv allaqachon mavjud",
                        constraint, [{"constraint": constraint}])
     if sqlstate == "23503":
         return problem(request, 409, "REFERENCE_ERROR", "Bog‘liq yozuv mavjud emas yoki ishlatilmoqda",
-                       constraint, [{"constraint": constraint}])
+                       "Bu yozuv boshqa ma’lumotlarda ishlatilmoqda yoki bog‘langan yozuv topilmadi. "
+                       "O‘chirish o‘rniga nofaol qilib qo‘yishingiz mumkin.", [{"constraint": constraint}])
+    if sqlstate == "23502":
+        column = getattr(diag, "column_name", None)
+        return problem(request, 422, "REQUIRED_FIELD", "Majburiy maydon bo‘sh qoldirildi", column,
+                       [{"field": column}])
     if sqlstate == "23514":
         return problem(request, 422, "CHECK_FAILED", "Ma’lumot cheklovga mos emas",
                        constraint, [{"constraint": constraint}])

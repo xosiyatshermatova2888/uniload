@@ -44,7 +44,18 @@ def load_grants(db: Session, user_id: uuid.UUID) -> list[Grant]:
         .join(Permission, Permission.id == RolePermission.permission_id)
         .where(UserRole.user_id == user_id)
     ).all()
-    return [Grant(code, scope_type, scope_id) for code, scope_type, scope_id in rows]
+    grants = [Grant(code, scope_type, scope_id) for code, scope_type, scope_id in rows]
+    faculty_ids = {g.scope_id for g in grants if g.scope_type == "faculty" and g.scope_id}
+    if faculty_ids:
+        # Fakultet ko‘lami = shu fakultetning barcha kafedralari.
+        from app.modules.org.models import Department
+        by_faculty: dict[uuid.UUID, list[uuid.UUID]] = {}
+        for dep_id, fac_id in db.execute(
+                select(Department.id, Department.faculty_id).where(Department.faculty_id.in_(faculty_ids))):
+            by_faculty.setdefault(fac_id, []).append(dep_id)
+        grants += [Grant(g.permission, "department", dep_id) for g in grants if g.scope_type == "faculty"
+                   for dep_id in by_faculty.get(g.scope_id, [])]
+    return grants
 
 
 def _client_ip(request: Request) -> str | None:

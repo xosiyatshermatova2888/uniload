@@ -27,7 +27,7 @@ class Principal:
         - `department_id` berilsa — shu kafedrani qamrab olishi kerak.
         - Hech biri berilmasa — ruxsat biror ko‘lamda mavjud bo‘lsa yetarli (ro‘yxatlarni
           ko‘rish uchun; natijani ko‘lam bo‘yicha filtrlash servis vazifasi).
-        Fakultet → kafedra ierarxiyasi 2-bosqichda (kafedralar moduli bilan) qo‘shiladi.
+        Fakultet ko‘lamidagi grantlar yuklashda shu fakultet kafedralariga yoyiladi (deps.load_grants).
         """
         for g in self.grants:
             if g.permission != code:
@@ -41,6 +41,19 @@ class Principal:
             if g.scope_type == "department" and g.scope_id == department_id:
                 return True
         return False
+
+    def department_scope(self, code: str) -> set[uuid.UUID] | None:
+        """Ruxsat qaysi kafedralarda amal qiladi: `None` — butun universitet, aks holda kafedralar to‘plami
+        (bo‘sh to‘plam — ruxsat yo‘q). Ro‘yxatlarni ko‘lam bo‘yicha filtrlash uchun."""
+        departments: set[uuid.UUID] = set()
+        for g in self.grants:
+            if g.permission != code:
+                continue
+            if g.scope_type in ("platform", "university"):
+                return None
+            if g.scope_type == "department" and g.scope_id:
+                departments.add(g.scope_id)
+        return departments
 
     @property
     def permissions(self) -> list[str]:

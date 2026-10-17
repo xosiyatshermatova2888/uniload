@@ -7,6 +7,7 @@ from app.core.deps import Ctx
 from app.core.errors import Conflict, NotFound, ValidationFailed
 from app.core.security import hash_password, validate_password_policy
 from app.modules.audit import service as audit
+from app.modules.curricula.service import ensure_lesson_types
 from app.modules.tenants.models import Plan, Subscription, University
 from app.modules.tenants.schemas import (
     PlanCreateIn,
@@ -111,6 +112,7 @@ def create_university(ctx: Ctx, body: UniversityCreateIn) -> PlatformUniversityO
     ctx.db.add(admin)
     ctx.db.flush()
     ctx.db.add(UserRole(university_id=uni.id, user_id=admin.id, role_id=admin_role.id, scope_type="university"))
+    ensure_lesson_types(ctx.db, uni.id)
     ctx.db.flush()
     audit.record_ctx(ctx, action="university.created", entity_type="university", entity_id=uni.id,
                      university_id=uni.id,

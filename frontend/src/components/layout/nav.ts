@@ -20,6 +20,9 @@ import {
 
 import type { MessageKey } from "@/i18n"
 
+/** Joriy ishlab chiqish bosqichi: `phase <= CURRENT_PHASE` bo‘lgan bo‘limlar ochiq. */
+export const CURRENT_PHASE = 2
+
 export interface NavItem {
   key: MessageKey
   href: string
@@ -84,4 +87,6 @@ export const settingsTabs: { key: MessageKey; href: string; permission: string }
   { key: "settings.university", href: "/settings/university", permission: "settings.view" },
   { key: "settings.users", href: "/settings/users", permission: "users.manage" },
   { key: "settings.roles", href: "/settings/roles", permission: "users.manage" },
+  { key: "settings.norms", href: "/settings/norms", permission: "teachers.view" },
+  { key: "settings.lessonTypes", href: "/settings/lesson-types", permission: "curriculum.view" },
 ]
